@@ -1,0 +1,13 @@
+{
+  "command": "go test -mod=readonly -tags=test_dep,disable_grpc_modules -count=1 -p=2 -timeout=5m -v ./service/history/workflow -run '^TestContextSuite$/^TestTaskCompletionBuffer_BudgetReleasedOn(MergeAndClear|FailedMerge)$'",
+  "env": {
+    "GOCACHE": "/tmp/temporal-pr12772-stage2c-hkl5i753/go-build",
+    "GOTOOLCHAIN": "go1.27.0",
+    "GOPROXY": "off",
+    "GOSUMDB": "off",
+    "GOMAXPROCS": "2",
+    "CGO_ENABLED": "1"
+  },
+  "exit_code": 1,
+  "seconds": 0.003
+}

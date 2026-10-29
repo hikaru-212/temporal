@@ -1,0 +1,201 @@
+diff --git a/service/history/api/respondworkflowtaskcompleted/api_test.go b/service/history/api/respondworkflowtaskcompleted/api_test.go
+index bd46aa970cfd1607764d1040efdc4971cca43ee6..42344f46fb94a5ad8e8acd296c1adfae48ead126 100644
+--- a/service/history/api/respondworkflowtaskcompleted/api_test.go
++++ b/service/history/api/respondworkflowtaskcompleted/api_test.go
+@@ -32,6 +32,7 @@ import (
+ 	"go.temporal.io/server/common/locks"
+ 	"go.temporal.io/server/common/log"
+ 	"go.temporal.io/server/common/metrics"
++	"go.temporal.io/server/common/metrics/metricstest"
+ 	"go.temporal.io/server/common/namespace"
+ 	"go.temporal.io/server/common/payloads"
+ 	"go.temporal.io/server/common/persistence"
+@@ -1118,6 +1119,67 @@ func (s *WorkflowTaskCompletedHandlerSuite) TestWorkflowTaskCompletionPagination
+   6 WorkflowExecutionUpdateCompleted`, <-writtenHistoryCh)
+ 	})
+ 
++	s.Run("Merged pages stay reserved until the transaction is persisted", func() {
++		tv := testvars.New(s.T())
++		tv = tv.WithRunID(tv.Any().RunID())
++		s.mockNamespaceCache.EXPECT().GetNamespaceByID(tv.NamespaceID()).Return(tv.Namespace(), nil).AnyTimes()
++		s.workflowTaskCompletedHandler.config.EnableWorkflowTaskCompletionPagination = func(string) bool { return true }
++
++		// The workflow context takes the shard's metrics handler when it is created.
++		metricsHandler := metricstest.NewCaptureHandler()
++		capture := metricsHandler.StartCapture()
++		defer metricsHandler.StopCapture(capture)
++		s.mockShard.SetMetricsHandler(metricsHandler)
++		inflightBytes := func() float64 {
++			recordings := capture.SnapshotMetric(metrics.WorkflowTaskCompletionBufferInflightBytes.Name())
++			s.Require().NotEmpty(recordings)
++			return recordings[len(recordings)-1].Value.(float64)
++		}
++
++		wfContext := s.createStartedWorkflow(tv)
++		_, err := wfContext.LoadMutableState(context.Background(), s.workflowTaskCompletedHandler.shardContext)
++		s.NoError(err)
++
++		updRequestMsg, upd, serializedTaskToken := s.createSentUpdate(tv, wfContext)
++		s.NotNil(upd)
++
++		resp, err := s.workflowTaskCompletedHandler.Invoke(context.Background(), &historyservice.RespondWorkflowTaskCompletedRequest{
++			NamespaceId: tv.NamespaceID().String(),
++			CompleteRequest: &workflowservice.RespondWorkflowTaskCompletedRequest{
++				TaskToken:        serializedTaskToken,
++				Commands:         s.UpdateAcceptCommands(tv),
++				IntermediatePage: true,
++				PageNumber:       0,
++				Identity:         tv.Any().String(),
++			},
++		})
++		s.NoError(err)
++		s.NotNil(resp)
++		reserved := inflightBytes()
++		s.Positive(reserved)
++
++		var inflightAtPersist float64
++		s.mockExecutionMgr.EXPECT().UpdateWorkflowExecution(gomock.Any(), gomock.Any()).DoAndReturn(
++			func(_ context.Context, _ *persistence.UpdateWorkflowExecutionRequest) (*persistence.UpdateWorkflowExecutionResponse, error) {
++				inflightAtPersist = inflightBytes()
++				return tests.UpdateWorkflowExecutionResponse, nil
++			}).Times(1)
++
++		_, err = s.workflowTaskCompletedHandler.Invoke(context.Background(), &historyservice.RespondWorkflowTaskCompletedRequest{
++			NamespaceId: tv.NamespaceID().String(),
++			CompleteRequest: &workflowservice.RespondWorkflowTaskCompletedRequest{
++				TaskToken:  serializedTaskToken,
++				Commands:   s.UpdateCompleteCommands(tv),
++				Messages:   s.UpdateAcceptCompleteMessages(tv, updRequestMsg),
++				PageNumber: 1,
++				Identity:   tv.Any().String(),
++			},
++		})
++		s.NoError(err)
++		s.InDelta(reserved, inflightAtPersist, 0, "merged pages must stay reserved while the transaction is persisted")
++		s.Zero(inflightBytes(), "merged pages must be released once the transaction is persisted")
++	})
++
+ 	s.Run("Buffer lost on eviction between pages", func() {
+ 		tv := testvars.New(s.T())
+ 		tv = tv.WithRunID(tv.Any().RunID())
+@@ -1192,7 +1254,7 @@ func (s *WorkflowTaskCompletedHandlerSuite) TestWorkflowTaskCompletionPagination
+ 
+ 		// A late final page referencing the timed-out workflow task must be reported as
+ 		// buffer-lost, not silently merged against a stale buffer.
+-		_, err = wfContext.GetMergedTaskCompletionPages(
++		_, _, err = wfContext.GetMergedTaskCompletionPages(
+ 			taskToken.GetScheduledEventId(),
+ 			taskToken.Attempt,
+ 			&workflowservice.RespondWorkflowTaskCompletedRequest{PageNumber: 1},
+@@ -1237,7 +1299,7 @@ func (s *WorkflowTaskCompletedHandlerSuite) TestWorkflowTaskCompletionPagination
+ 
+ 		// A late final page referencing the closed WFT must be reported as
+ 		// buffer lost, not silently merged against a stale buffer.
+-		_, err = wfContext.GetMergedTaskCompletionPages(
++		_, _, err = wfContext.GetMergedTaskCompletionPages(
+ 			taskToken.GetScheduledEventId(),
+ 			taskToken.Attempt,
+ 			&workflowservice.RespondWorkflowTaskCompletedRequest{PageNumber: 1},
+diff --git a/service/history/workflow/context_test.go b/service/history/workflow/context_test.go
+index f7463dfac3ee550f59b323455da070dae73ebf43..2ddaa60211baf79d712dad1419559d522aec565a 100644
+--- a/service/history/workflow/context_test.go
++++ b/service/history/workflow/context_test.go
+@@ -633,7 +633,7 @@ func (s *contextSuite) TestTaskCompletionBuffer_AttemptIsolation() {
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(schedID, 2, intermediatePage(0, "attempt2")))
+ 
+ 	// Attempt 1's final page can no longer find its buffer.
+-	_, err := s.workflowContext.GetMergedTaskCompletionPages(schedID, 1, finalPage(1, nil))
++	_, _, err := s.workflowContext.GetMergedTaskCompletionPages(schedID, 1, finalPage(1, nil))
+ 	var bufferLost *serviceerror.WorkflowTaskCompletionBufferLost
+ 	s.ErrorAs(err, &bufferLost)
+ }
+@@ -646,7 +646,7 @@ func (s *contextSuite) TestTaskCompletionBuffer_GapDetection() {
+ 
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(schedID, 1, intermediatePage(0, "p0")))
+ 	// Page 1 never buffered; final page claims pages 0 and 1 preceded it.
+-	_, err := s.workflowContext.GetMergedTaskCompletionPages(schedID, 1, finalPage(2, nil))
++	_, _, err := s.workflowContext.GetMergedTaskCompletionPages(schedID, 1, finalPage(2, nil))
+ 	var bufferLost *serviceerror.WorkflowTaskCompletionBufferLost
+ 	s.ErrorAs(err, &bufferLost)
+ }
+@@ -661,7 +661,7 @@ func (s *contextSuite) TestTaskCompletionBuffer_Idempotency() {
+ 	// Resend page 0 with different content; first write must win.
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(schedID, 1, intermediatePage(0, "second")))
+ 
+-	merged, err := s.workflowContext.GetMergedTaskCompletionPages(schedID, 1, finalPage(1, intermediatePage(1, "final").Commands))
++	merged, _, err := s.workflowContext.GetMergedTaskCompletionPages(schedID, 1, finalPage(1, intermediatePage(1, "final").Commands))
+ 	s.NoError(err)
+ 	s.Len(merged, 1)
+ 	s.Equal("first", merged[0].GetRecordMarkerCommandAttributes().GetMarkerName())
+@@ -676,7 +676,7 @@ func (s *contextSuite) TestTaskCompletionBuffer_PageCountLimit() {
+ 	s.ErrorAs(err, &invalidArgument)
+ 
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(schedID, 1, intermediatePage(0, "p0")))
+-	_, err = s.workflowContext.GetMergedTaskCompletionPages(schedID, 1, finalPage(maxWorkflowTaskCompletionPages, nil))
++	_, _, err = s.workflowContext.GetMergedTaskCompletionPages(schedID, 1, finalPage(maxWorkflowTaskCompletionPages, nil))
+ 	s.ErrorAs(err, &invalidArgument)
+ }
+ 
+@@ -756,8 +756,9 @@ func (s *contextSuite) TestTaskCompletionBuffer_ProcessLimitDropsPartialBuffer()
+ 	s.Equal(processLimit-page0Size, budget.Used())
+ }
+ 
+-// TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear verifies the process counter
+-// goes back to zero after a successful merge
++// TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear verifies that a successful merge
++// keeps the buffer reservation until the returned release func is called, and that
++// Clear() releases a buffer that was not merged
+ func (s *contextSuite) TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear() {
+ 	budget := limiter.NewKeyedBytesLimiter()
+ 	s.workflowContext.paginationLimiter = budget
+@@ -767,19 +768,48 @@ func (s *contextSuite) TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear()
+ 
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(10, 1, intermediatePage(0, "p0")))
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(10, 1, intermediatePage(1, "p1")))
+-	s.Positive(budget.Used())
++	reserved := budget.Used()
++	s.Positive(reserved)
+ 
+-	_, err := s.workflowContext.GetMergedTaskCompletionPages(10, 1, finalPage(2, nil))
++	_, release, err := s.workflowContext.GetMergedTaskCompletionPages(10, 1, finalPage(2, nil))
+ 	s.NoError(err)
++	s.Nil(s.workflowContext.taskCompletionBuffer)
++
++	// The reservation outlives the buffer until the transaction is persisted.
++	s.workflowContext.reconcileTaskCompletionBuffer()
++	s.workflowContext.Clear()
++	s.Equal(reserved, budget.Used())
++
++	release()
+ 	s.Equal(int64(0), budget.Used())
+ 
+ 	// And after Clear() of a fresh buffer.
++	s.setTaskCompletionBufferSizeLimit(0)
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(10, 1, intermediatePage(0, "p0")))
+ 	s.Positive(budget.Used())
+ 	s.workflowContext.Clear()
+ 	s.Equal(int64(0), budget.Used())
+ }
+ 
++// TestTaskCompletionBuffer_BudgetReleasedOnFailedMerge verifies that a merge that fails
++// with BufferLost releases the buffer reservation right away
++func (s *contextSuite) TestTaskCompletionBuffer_BudgetReleasedOnFailedMerge() {
++	budget := limiter.NewKeyedBytesLimiter()
++	s.workflowContext.paginationLimiter = budget
++	s.setTaskCompletionBufferSizeLimit(0)
++
++	s.NoError(s.workflowContext.AppendTaskCompletionPage(10, 1, intermediatePage(0, "p0")))
++	s.Positive(budget.Used())
++
++	// Page 1 was never buffered.
++	_, release, err := s.workflowContext.GetMergedTaskCompletionPages(10, 1, finalPage(2, nil))
++	var bufferLost *serviceerror.WorkflowTaskCompletionBufferLost
++	s.ErrorAs(err, &bufferLost)
++	s.Nil(release)
++	s.Nil(s.workflowContext.taskCompletionBuffer)
++	s.Equal(int64(0), budget.Used())
++}
++
+ // TestTaskCompletionBuffer_NewPaginationLimit verifies that a new pagination request only
+ // gets WorkflowTaskCompletionBufferNewPaginationRatio of the process
+ // limit and the namespace share, while in-flight paginations can use

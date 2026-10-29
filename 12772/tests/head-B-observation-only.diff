@@ -1,0 +1,24 @@
+--- HEAD/service/history/api/respondworkflowtaskcompleted/api_test.go
++++ HEAD-log-only/service/history/api/respondworkflowtaskcompleted/api_test.go
+@@ -1157,11 +1157,13 @@
+ 		s.NotNil(resp)
+ 		reserved := inflightBytes()
+ 		s.Positive(reserved)
++		s.T().Logf("EVIDENCE B initial=%.0f", reserved)
+ 
+ 		var inflightAtPersist float64
+ 		s.mockExecutionMgr.EXPECT().UpdateWorkflowExecution(gomock.Any(), gomock.Any()).DoAndReturn(
+ 			func(_ context.Context, _ *persistence.UpdateWorkflowExecutionRequest) (*persistence.UpdateWorkflowExecutionResponse, error) {
+ 				inflightAtPersist = inflightBytes()
++				s.T().Logf("EVIDENCE B at_persistence=%.0f", inflightAtPersist)
+ 				return tests.UpdateWorkflowExecutionResponse, nil
+ 			}).Times(1)
+ 
+@@ -1176,6 +1178,7 @@
+ 			},
+ 		})
+ 		s.NoError(err)
++		s.T().Logf("EVIDENCE B after_handler=%.0f", inflightBytes())
+ 		s.InDelta(reserved, inflightAtPersist, 0, "merged pages must stay reserved while the transaction is persisted")
+ 		s.Zero(inflightBytes(), "merged pages must be released once the transaction is persisted")
+ 	})

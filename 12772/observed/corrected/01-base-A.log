@@ -1,0 +1,18 @@
+=== RUN   TestContextSuite
+=== RUN   TestContextSuite/TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear
+2026-10-29T14:45:38.183Z	info	Task key range updated	{"number": 0, "next-number": 1048576, "logging-call-at": "/tmp/temporal-pr12772-corrected-lzmr_1qp/base/service/history/shard/task_key_generator.go:155"}
+    context_test.go:772: EVIDENCE A initial=16
+    context_test.go:776: EVIDENCE A after_merge=0
+    context_test.go:777: 
+        	Error Trace:	/tmp/temporal-pr12772-corrected-lzmr_1qp/base/service/history/workflow/context_test.go:777
+        	            				/home/researcher/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64/src/runtime/asm_arm64.s:1039
+        	Error:      	Not equal: 
+        	            	expected: 16
+        	            	actual  : 0
+        	Test:       	TestContextSuite/TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear
+        	Messages:   	successful merge must retain the reservation until transaction owner release
+--- FAIL: TestContextSuite (0.00s)
+    --- FAIL: TestContextSuite/TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear (0.00s)
+FAIL
+FAIL	go.temporal.io/server/service/history/workflow	0.018s
+FAIL

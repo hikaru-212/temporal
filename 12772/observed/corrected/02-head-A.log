@@ -1,0 +1,11 @@
+=== RUN   TestContextSuite
+=== RUN   TestContextSuite/TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear
+2026-10-29T14:45:55.371Z	info	Task key range updated	{"number": 0, "next-number": 1048576, "logging-call-at": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter/service/history/shard/task_key_generator.go:155"}
+    context_test.go:773: EVIDENCE A initial=16
+    context_test.go:778: EVIDENCE A after_merge=16
+    context_test.go:783: EVIDENCE A after_context_cleanup=16
+    context_test.go:787: EVIDENCE A after_release=0
+--- PASS: TestContextSuite (0.00s)
+    --- PASS: TestContextSuite/TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear (0.00s)
+PASS
+ok  	go.temporal.io/server/service/history/workflow	0.018s

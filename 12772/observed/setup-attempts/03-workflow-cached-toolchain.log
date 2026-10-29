@@ -1,0 +1,71 @@
+go: downloading go.temporal.io/api v1.63.8-0.20261016215345-3926793dec12
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/activity.go:9:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/command_handler.go:8:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/activity.go:10:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/mutable_state_impl.go:19:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/activity.go:11:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/activity.go:12:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/activity.go:13:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/mutable_state_impl.go:23:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/external_payload_size.go:8:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/query.go:8:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/activity.go:14:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/activity.go:15:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/activity.go:16:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/mutable_state_impl.go:27:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/mutable_state_impl.go:28:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/activity.go:17:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+service/history/workflow/context.go:16:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+api/adminservice/v1/request_response.pb.go:17:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+api/adminservice/v1/request_response.pb.go:18:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+api/adminservice/v1/request_response.pb.go:20:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+api/persistence/v1/chasm.pb.go:16:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+api/deployment/v1/message.pb.go:15:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+api/historyservice/v1/request_response.pb.go:21:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+../../../../go/pkg/mod/go.temporal.io/sdk@v1.49.0/converter/proto_json_payload_converter.go:12:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+../../../../go/pkg/mod/go.temporal.io/sdk@v1.49.0/internal/internal_worker_heartbeat.go:15:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+../../../../go/pkg/mod/go.temporal.io/sdk@v1.49.0/internal/client.go:14:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+../../../../go/pkg/mod/go.temporal.io/sdk@v1.49.0/internal/internal_schedule_client.go:15:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+../../../../go/pkg/mod/go.temporal.io/sdk@v1.49.0/internal/internal_nexus_task_handler.go:21:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+../../../../go/pkg/mod/go.temporal.io/sdk@v1.49.0/internal/internal_worker.go:33:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+../../../../go/pkg/mod/go.temporal.io/sdk@v1.49.0/internal/common/retry/interceptor.go:13:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+chasm/lib/nexusoperation/operation.go:16:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+chasm/lib/callback/component.go:10:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+chasm/lib/callback/invocable_nexushandler.go:13:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+# go.temporal.io/server/service/history/workflow
+chasm/lib/workflow/nexus_service.go:10:2: open /home/researcher/go/pkg/mod/cache/download/go.temporal.io/api/@v/v1.63.8-0.20261016215345-3926793dec12.lock: read-only file system
+FAIL	go.temporal.io/server/service/history/workflow [setup failed]
+FAIL

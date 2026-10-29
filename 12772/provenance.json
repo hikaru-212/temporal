@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-10-29T23:07:26+08:00",
+  "preparation_timezone": "Asia/Taipei",
+  "repository": "temporalio/temporal",
+  "pr": 12772,
+  "pr_url": "https://github.com/temporalio/temporal/pull/12772",
+  "publication_remote": "https://github.com/hikaru-212/temporal.git",
+  "local_directory": "/home/researcher/oss/temporal-review-evidence",
+  "local_branch": "review-evidence",
+  "preparation_scope": "Local preparation only; no staging, commits, pushes, remote branch creation, or test execution.",
+  "revisions": {
+    "tested_base": "fbc3a07d87bdd0c4144188ed394449554aa0875b",
+    "head": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+    "recorded_pr_target_snapshot": "01766a34880758f7dad6697621777287b777fbd8",
+    "base_is_head_direct_parent": true,
+    "base_is_merge_base_with_recorded_target": true
+  },
+  "source_directories": [
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753"
+  ],
+  "organization_reference": {
+    "url": "https://github.com/hikaru-212/ray/tree/review-evidence",
+    "root_readme_blob": "72a90f2318f1e253a2f01df0b4e73ebb2c330689",
+    "adaptation": "Root index, per-PR case, focused test patches, observed results, provenance and checksum manifest; user-requested flat 12772 layout."
+  },
+  "copied_artifacts": [
+    {
+      "package_path": "12772/tests/base-A-test-only.diff",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/base-A-test-only.diff",
+      "source_sha256": "d6122568f73ce2d62efa8676847455b95fe0685db4063b926d686aa814236c21",
+      "package_sha256": "d6122568f73ce2d62efa8676847455b95fe0685db4063b926d686aa814236c21",
+      "bytes": 1413,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/tests/base-B-test-only.diff",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/base-B-test-only.diff",
+      "source_sha256": "c26921c7cd19e019c049da9f8aa662f66fd8d882053ebe74860aacfa47414de4",
+      "package_sha256": "c26921c7cd19e019c049da9f8aa662f66fd8d882053ebe74860aacfa47414de4",
+      "bytes": 3640,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/tests/head-A-observation-only.diff",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/head-A-observation-only.diff",
+      "source_sha256": "94845e8db2755673c9534bb2b30b37080c16fbeccf2aa4f22106c699407c649f",
+      "package_sha256": "94845e8db2755673c9534bb2b30b37080c16fbeccf2aa4f22106c699407c649f",
+      "bytes": 951,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/tests/head-B-observation-only.diff",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/head-B-observation-only.diff",
+      "source_sha256": "ea0afd1f62692cb026c6134c3c32329e6e3568775de845a90a06d9ee6c170bb9",
+      "package_sha256": "ea0afd1f62692cb026c6134c3c32329e6e3568775de845a90a06d9ee6c170bb9",
+      "bytes": 1073,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/01-base-A.json",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/01-base-A.json",
+      "source_sha256": "225c3c31a9285bcebc014b4ba6a703b8c5c1139fa0d8ff275a8782c7c6b07b3f",
+      "package_sha256": "225c3c31a9285bcebc014b4ba6a703b8c5c1139fa0d8ff275a8782c7c6b07b3f",
+      "bytes": 1127,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/01-base-A.log",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/01-base-A.log",
+      "source_sha256": "81337b0944487ba84919e9925a714bebbb69851fa6e0ed928aaf7ba929dd42d1",
+      "package_sha256": "81337b0944487ba84919e9925a714bebbb69851fa6e0ed928aaf7ba929dd42d1",
+      "bytes": 1177,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/02-head-A.json",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/02-head-A.json",
+      "source_sha256": "bc2ff1aa790b1448ad23da1df766aa8f140d485df622c8928e9122217f3e8dc8",
+      "package_sha256": "bc2ff1aa790b1448ad23da1df766aa8f140d485df622c8928e9122217f3e8dc8",
+      "bytes": 1304,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/02-head-A.log",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/02-head-A.log",
+      "source_sha256": "b909795e3516f8d82f31018d502d2cfa10d0d93ee0ae2441a068d1c1814a9de6",
+      "package_sha256": "b909795e3516f8d82f31018d502d2cfa10d0d93ee0ae2441a068d1c1814a9de6",
+      "bytes": 751,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/03-base-B.json",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/03-base-B.json",
+      "source_sha256": "7576a62ebeef0077a21f341996d56867d86ba5e6687544ffe13e5e81be9d07bd",
+      "package_sha256": "7576a62ebeef0077a21f341996d56867d86ba5e6687544ffe13e5e81be9d07bd",
+      "bytes": 1308,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/03-base-B.log",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/03-base-B.log",
+      "source_sha256": "9329227e85d40ee0f7d5c6c0496243a191b571486a054322339ab2300c523912",
+      "package_sha256": "9329227e85d40ee0f7d5c6c0496243a191b571486a054322339ab2300c523912",
+      "bytes": 1651,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/04-head-B.json",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/04-head-B.json",
+      "source_sha256": "1309666858c75bf399eb1551276aedfed9f88414033a69fa8086b02d3bfdea63",
+      "package_sha256": "1309666858c75bf399eb1551276aedfed9f88414033a69fa8086b02d3bfdea63",
+      "bytes": 1486,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/04-head-B.log",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/04-head-B.log",
+      "source_sha256": "42df15ee265620a4cfc134351a3c79a0ab0d27fd25b024c7ee93d16e4d13437e",
+      "package_sha256": "42df15ee265620a4cfc134351a3c79a0ab0d27fd25b024c7ee93d16e4d13437e",
+      "bytes": 1074,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/configuration.json",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/configuration.json",
+      "source_sha256": "d671b18a8f64e7dcc8dda44864317ba1f6a048019cbc3d71d9e7b64368733e44",
+      "package_sha256": "d671b18a8f64e7dcc8dda44864317ba1f6a048019cbc3d71d9e7b64368733e44",
+      "bytes": 600,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/results.json",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/results.json",
+      "source_sha256": "1584e2e1c69c3ff73897c20944ee05b32231c58bd6d179a26705de111dcf5e19",
+      "package_sha256": "1584e2e1c69c3ff73897c20944ee05b32231c58bd6d179a26705de111dcf5e19",
+      "bytes": 2100,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/corrected/commands.txt",
+      "source_path": "/tmp/temporal-pr12772-corrected-lzmr_1qp/commands.txt",
+      "source_sha256": "8756a9ee6d2fd98173652331ff01ed0a11318dfa38dcc6695b8e0b442d5223c9",
+      "package_sha256": "8756a9ee6d2fd98173652331ff01ed0a11318dfa38dcc6695b8e0b442d5223c9",
+      "bytes": 2463,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/earlier/04-workflow-normal.json",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/04-workflow-normal.json",
+      "source_sha256": "8852e70abb328915ea71ab1d450760e53364e49c8236e5219c4840186c46e15b",
+      "package_sha256": "8852e70abb328915ea71ab1d450760e53364e49c8236e5219c4840186c46e15b",
+      "bytes": 567,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/earlier/04-workflow-normal.log",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/04-workflow-normal.log",
+      "source_sha256": "fca5bad264f07c509ff39c607a35e99a8cecb9735645911636e3e2a822f0a882",
+      "package_sha256": "fca5bad264f07c509ff39c607a35e99a8cecb9735645911636e3e2a822f0a882",
+      "bytes": 1023,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/earlier/05-handler-normal.json",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/05-handler-normal.json",
+      "source_sha256": "d8f7c33c6841119055f7f2697f72cda2b42f2dc2d8de89edc2e7ce6223ab6515",
+      "package_sha256": "d8f7c33c6841119055f7f2697f72cda2b42f2dc2d8de89edc2e7ce6223ab6515",
+      "bytes": 674,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/earlier/05-handler-normal.log",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/05-handler-normal.log",
+      "source_sha256": "88cd2e138a00676daea7563c6cd8b1e92be60166636ab19ce4c6f61c1262f48d",
+      "package_sha256": "88cd2e138a00676daea7563c6cd8b1e92be60166636ab19ce4c6f61c1262f48d",
+      "bytes": 928,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/earlier/06-workflow-race.json",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/06-workflow-race.json",
+      "source_sha256": "073e29081e14d2cbbc423b51ebec5e0efa17faba642e46346f796be9a99760d3",
+      "package_sha256": "073e29081e14d2cbbc423b51ebec5e0efa17faba642e46346f796be9a99760d3",
+      "bytes": 603,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/earlier/06-workflow-race.log",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/06-workflow-race.log",
+      "source_sha256": "a625a37fb982260bb431b7707427c09e60b44280aa47948162f3678fb3a4ccb6",
+      "package_sha256": "a625a37fb982260bb431b7707427c09e60b44280aa47948162f3678fb3a4ccb6",
+      "bytes": 950,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/earlier/07-handler-race.json",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/07-handler-race.json",
+      "source_sha256": "15719c84a5c3a8d019994c623de3fa673214823bddd8e9aa6a2fc5737b3f94f5",
+      "package_sha256": "15719c84a5c3a8d019994c623de3fa673214823bddd8e9aa6a2fc5737b3f94f5",
+      "bytes": 678,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/earlier/07-handler-race.log",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/07-handler-race.log",
+      "source_sha256": "cc6dabc3903051d0dd96b6d451423d268cf4d2df3e8b2acf18c58add1985a199",
+      "package_sha256": "cc6dabc3903051d0dd96b6d451423d268cf4d2df3e8b2acf18c58add1985a199",
+      "bytes": 928,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/earlier/08-worktree-final.json",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/08-worktree-final.json",
+      "source_sha256": "a78cda601bae64cda137b2c2de2cea43f797f6eb47e978699d63a59a21179f8b",
+      "package_sha256": "a78cda601bae64cda137b2c2de2cea43f797f6eb47e978699d63a59a21179f8b",
+      "bytes": 861,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/setup-attempts/01-workflow-offline.json",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/01-workflow-offline.json",
+      "source_sha256": "079537b0d4868f975e923db49b46d3d681db893b375d0936b5727bf3dea81e2a",
+      "package_sha256": "079537b0d4868f975e923db49b46d3d681db893b375d0936b5727bf3dea81e2a",
+      "bytes": 468,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/setup-attempts/01-workflow-offline.log",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/01-workflow-offline.log",
+      "source_sha256": "4ed09d389d9c7e01eff80bf66ef1972e8c843105c85aa352acd758ddc090fb6b",
+      "package_sha256": "4ed09d389d9c7e01eff80bf66ef1972e8c843105c85aa352acd758ddc090fb6b",
+      "bytes": 72,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/setup-attempts/02-workflow-offline-go127.json",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/02-workflow-offline-go127.json",
+      "source_sha256": "391296f91574f1fda6712c05ddb694c594a584c8f282896fb803ebfb555a7b6b",
+      "package_sha256": "391296f91574f1fda6712c05ddb694c594a584c8f282896fb803ebfb555a7b6b",
+      "bytes": 471,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/setup-attempts/02-workflow-offline-go127.log",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/02-workflow-offline-go127.log",
+      "source_sha256": "1c9cee638ba9737e47594a67ca83a4804b00ebf1a83a0823e6a78a294184d29b",
+      "package_sha256": "1c9cee638ba9737e47594a67ca83a4804b00ebf1a83a0823e6a78a294184d29b",
+      "bytes": 114,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/setup-attempts/03-workflow-cached-toolchain.json",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/03-workflow-cached-toolchain.json",
+      "source_sha256": "fb92ca30909efe34110ec9881b72a280624eb955bfb104bab41084a6deb60189",
+      "package_sha256": "fb92ca30909efe34110ec9881b72a280624eb955bfb104bab41084a6deb60189",
+      "bytes": 527,
+      "transformation": "none; byte-identical copy"
+    },
+    {
+      "package_path": "12772/observed/setup-attempts/03-workflow-cached-toolchain.log",
+      "source_path": "/tmp/temporal-pr12772-stage2c-hkl5i753/03-workflow-cached-toolchain.log",
+      "source_sha256": "fc92bf5e2a98e8098470fd0714b5aec5b10315375b49455f378d5f993d5bed34",
+      "package_sha256": "fc92bf5e2a98e8098470fd0714b5aec5b10315375b49455f378d5f993d5bed34",
+      "bytes": 8299,
+      "transformation": "none; byte-identical copy"
+    }
+  ],
+  "generated_artifacts": [
+    {
+      "path": "12772/tests/original-pr-test-only.diff",
+      "source": "existing local Temporal Git object database",
+      "argv": [
+        "git",
+        "diff",
+        "--no-ext-diff",
+        "--no-textconv",
+        "--binary",
+        "--full-index",
+        "fbc3a07d87bdd0c4144188ed394449554aa0875b",
+        "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+        "--",
+        "*_test.go"
+      ],
+      "sha256": "589b8648ce9142e115416de6aeec3f57dcbe7bf1a760e98901c784db443007b8",
+      "scope": "Only the two PR-changed *_test.go files; no production patch."
+    },
+    {
+      "path": "12772/observed/source-verification.json",
+      "method": "Checks derived from existing source artifacts and exact Git objects; no tests rerun."
+    },
+    {
+      "path": "README.md",
+      "method": "New case index and unborn-branch explanation."
+    },
+    {
+      "path": "12772/README.md",
+      "method": "New bounded summary cross-checked against retained raw records."
+    },
+    {
+      "path": "12772/tests/REPRODUCTION.md",
+      "method": "Historical commands plus portable fresh-archive/overlay adaptation; not executed."
+    }
+  ],
+  "audited_source_hashes": {
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/base-A-test-only.diff": "d6122568f73ce2d62efa8676847455b95fe0685db4063b926d686aa814236c21",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/base-B-test-only.diff": "c26921c7cd19e019c049da9f8aa662f66fd8d882053ebe74860aacfa47414de4",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/head-A-observation-only.diff": "94845e8db2755673c9534bb2b30b37080c16fbeccf2aa4f22106c699407c649f",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/head-B-observation-only.diff": "ea0afd1f62692cb026c6134c3c32329e6e3568775de845a90a06d9ee6c170bb9",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/01-base-A.json": "225c3c31a9285bcebc014b4ba6a703b8c5c1139fa0d8ff275a8782c7c6b07b3f",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/01-base-A.log": "81337b0944487ba84919e9925a714bebbb69851fa6e0ed928aaf7ba929dd42d1",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/02-head-A.json": "bc2ff1aa790b1448ad23da1df766aa8f140d485df622c8928e9122217f3e8dc8",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/02-head-A.log": "b909795e3516f8d82f31018d502d2cfa10d0d93ee0ae2441a068d1c1814a9de6",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/03-base-B.json": "7576a62ebeef0077a21f341996d56867d86ba5e6687544ffe13e5e81be9d07bd",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/03-base-B.log": "9329227e85d40ee0f7d5c6c0496243a191b571486a054322339ab2300c523912",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/04-head-B.json": "1309666858c75bf399eb1551276aedfed9f88414033a69fa8086b02d3bfdea63",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/04-head-B.log": "42df15ee265620a4cfc134351a3c79a0ab0d27fd25b024c7ee93d16e4d13437e",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/configuration.json": "d671b18a8f64e7dcc8dda44864317ba1f6a048019cbc3d71d9e7b64368733e44",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/results.json": "1584e2e1c69c3ff73897c20944ee05b32231c58bd6d179a26705de111dcf5e19",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/commands.txt": "8756a9ee6d2fd98173652331ff01ed0a11318dfa38dcc6695b8e0b442d5223c9",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/04-workflow-normal.json": "8852e70abb328915ea71ab1d450760e53364e49c8236e5219c4840186c46e15b",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/04-workflow-normal.log": "fca5bad264f07c509ff39c607a35e99a8cecb9735645911636e3e2a822f0a882",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/05-handler-normal.json": "d8f7c33c6841119055f7f2697f72cda2b42f2dc2d8de89edc2e7ce6223ab6515",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/05-handler-normal.log": "88cd2e138a00676daea7563c6cd8b1e92be60166636ab19ce4c6f61c1262f48d",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/06-workflow-race.json": "073e29081e14d2cbbc423b51ebec5e0efa17faba642e46346f796be9a99760d3",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/06-workflow-race.log": "a625a37fb982260bb431b7707427c09e60b44280aa47948162f3678fb3a4ccb6",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/07-handler-race.json": "15719c84a5c3a8d019994c623de3fa673214823bddd8e9aa6a2fc5737b3f94f5",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/07-handler-race.log": "cc6dabc3903051d0dd96b6d451423d268cf4d2df3e8b2acf18c58add1985a199",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/08-worktree-final.json": "a78cda601bae64cda137b2c2de2cea43f797f6eb47e978699d63a59a21179f8b",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/01-workflow-offline.json": "079537b0d4868f975e923db49b46d3d681db893b375d0936b5727bf3dea81e2a",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/01-workflow-offline.log": "4ed09d389d9c7e01eff80bf66ef1972e8c843105c85aa352acd758ddc090fb6b",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/02-workflow-offline-go127.json": "391296f91574f1fda6712c05ddb694c594a584c8f282896fb803ebfb555a7b6b",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/02-workflow-offline-go127.log": "1c9cee638ba9737e47594a67ca83a4804b00ebf1a83a0823e6a78a294184d29b",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/03-workflow-cached-toolchain.json": "fb92ca30909efe34110ec9881b72a280624eb955bfb104bab41084a6deb60189",
+    "/tmp/temporal-pr12772-stage2c-hkl5i753/03-workflow-cached-toolchain.log": "fc92bf5e2a98e8098470fd0714b5aec5b10315375b49455f378d5f993d5bed34",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/preflight.json": "a3cdae1f50ce5da9b6466769946a76586ea470ea27d012d70a69ae824c77dbf0",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/final-integrity-commands.json": "4492af1bf9f8321fda940bd5e797c760975abd6fde2d8316d7ca6c0d0ae05380",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/base-original-manifest.json": "456ed34a0c0a4179e5664eaea0fa131c398d590ca58fa76001a0a980764232f6",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/base/service/history/workflow/context_test.go": "99eef8c32a30cbfbf031125a701207ab4303d499d10615b8870ad4e01bd1922e",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/base/service/history/api/respondworkflowtaskcompleted/api_test.go": "5c1f91ebaeef213ee498e8202498b5a4a999b250032545b24901bd0f4c0f2a54",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/head-observation/context_test.go": "6124b60455f8800396b89848374df1ffd5fdb129d5305c0cac32c608fea52334",
+    "/tmp/temporal-pr12772-corrected-lzmr_1qp/head-observation/api_test.go": "4a5b67fdb034336c11a40f506c4207f2f3d645ea4c353e776974a33e5abbc819"
+  },
+  "recorded_environment": {
+    "toolchain": "go version go1.27.0 linux/arm64",
+    "successful_run_env": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "GOTOOLCHAIN": "local",
+      "GOCACHE": "/home/researcher/.cache/go-build",
+      "GOPROXY": "https://proxy.golang.org",
+      "GOSUMDB": "sum.golang.org",
+      "GOMAXPROCS": "2",
+      "CGO_ENABLED": "1"
+    },
+    "test_flags": [
+      "-mod=readonly",
+      "-tags=test_dep,disable_grpc_modules",
+      "-count=1",
+      "-p=2",
+      "-timeout=5m",
+      "-v"
+    ],
+    "earlier_race_flag": "-race",
+    "full_os_container_compiler_inventory": "not recorded"
+  },
+  "limitations": [
+    "Focused mock-based suite tests; no full cluster, real database, crash recovery or load validation.",
+    "Corrected matrix has four normal executions and zero race executions; earlier race results are HEAD-only.",
+    "BASE A fails at post-merge retention; later BASE lifecycle behavior is not observed.",
+    "Recorded PR target SHA is not the tested BASE SHA.",
+    "disable_grpc_modules excludes paths; results cannot establish their correctness.",
+    "Earlier run records lack per-run commit fields; HEAD attribution uses the accompanying final worktree record.",
+    "Portable reproduction instructions were not executed; historical absolute paths are retained unchanged.",
+    "Hashes do not independently prove historical execution or exhaustive correctness."
+  ],
+  "excluded": [
+    "base.tar",
+    "base/ source tree",
+    "head-observation/ full test files",
+    "go-build/ cache",
+    "toolchains and binaries",
+    "full repository ref dump",
+    "full 4094-file BASE manifest",
+    "redundant combined BASE patch",
+    "historical runner and absolute overlay maps already described by records"
+  ],
+  "checksum_scope": "12772/SHA256SUMS lists every prepared file except itself, with paths relative to the evidence repository root."
+}

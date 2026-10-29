@@ -1,0 +1,9 @@
+=== RUN   TestWorkflowTaskCompletedHandlerSuite
+=== RUN   TestWorkflowTaskCompletedHandlerSuite/TestWorkflowTaskCompletionPagination
+=== RUN   TestWorkflowTaskCompletedHandlerSuite/TestWorkflowTaskCompletionPagination/Merged_pages_stay_reserved_until_the_transaction_is_persisted
+2026-10-29T14:24:29.619Z	info	Task key range updated	{"number": 1048576, "next-number": 2097152, "logging-call-at": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter/service/history/shard/task_key_generator.go:155"}
+--- PASS: TestWorkflowTaskCompletedHandlerSuite (0.00s)
+    --- PASS: TestWorkflowTaskCompletedHandlerSuite/TestWorkflowTaskCompletionPagination (0.00s)
+        --- PASS: TestWorkflowTaskCompletedHandlerSuite/TestWorkflowTaskCompletionPagination/Merged_pages_stay_reserved_until_the_transaction_is_persisted (0.00s)
+PASS
+ok  	go.temporal.io/server/service/history/api/respondworkflowtaskcompleted	0.019s

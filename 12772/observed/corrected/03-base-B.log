@@ -1,0 +1,19 @@
+=== RUN   TestWorkflowTaskCompletedHandlerSuite
+=== RUN   TestWorkflowTaskCompletedHandlerSuite/TestWorkflowTaskCompletionPagination
+=== RUN   TestWorkflowTaskCompletedHandlerSuite/TestWorkflowTaskCompletionPagination/Merged_pages_stay_reserved_until_the_transaction_is_persisted
+2026-10-29T14:46:32.241Z	info	Task key range updated	{"number": 1048576, "next-number": 2097152, "logging-call-at": "/tmp/temporal-pr12772-corrected-lzmr_1qp/base/service/history/shard/task_key_generator.go:155"}
+    api_test.go:1160: EVIDENCE B initial=171
+    api_test.go:1166: EVIDENCE B at_persistence=0
+    api_test.go:1181: EVIDENCE B after_handler=0
+    api_test.go:1182: 
+        	Error Trace:	/tmp/temporal-pr12772-corrected-lzmr_1qp/base/service/history/api/respondworkflowtaskcompleted/api_test.go:1182
+        	            				/home/researcher/go/pkg/mod/github.com/stretchr/testify@v1.11.1/suite/suite.go:115
+        	Error:      	Max difference between 171 and 0 allowed is 0, but difference was 171
+        	Test:       	TestWorkflowTaskCompletedHandlerSuite/TestWorkflowTaskCompletionPagination/Merged_pages_stay_reserved_until_the_transaction_is_persisted
+        	Messages:   	merged pages must stay reserved while the transaction is persisted
+--- FAIL: TestWorkflowTaskCompletedHandlerSuite (0.00s)
+    --- FAIL: TestWorkflowTaskCompletedHandlerSuite/TestWorkflowTaskCompletionPagination (0.00s)
+        --- FAIL: TestWorkflowTaskCompletedHandlerSuite/TestWorkflowTaskCompletionPagination/Merged_pages_stay_reserved_until_the_transaction_is_persisted (0.00s)
+FAIL
+FAIL	go.temporal.io/server/service/history/api/respondworkflowtaskcompleted	0.017s
+FAIL

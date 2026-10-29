@@ -1,0 +1,33 @@
+{
+  "name": "02-head-A",
+  "invariant": "A",
+  "arm": "HEAD",
+  "commit": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+  "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+  "argv": [
+    "/home/researcher/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64/bin/go",
+    "test",
+    "-mod=readonly",
+    "-tags=test_dep,disable_grpc_modules",
+    "-count=1",
+    "-p=2",
+    "-timeout=5m",
+    "-v",
+    "-overlay=/tmp/temporal-pr12772-corrected-lzmr_1qp/head-A-overlay.json",
+    "./service/history/workflow",
+    "-run",
+    "^TestContextSuite$/^TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear$"
+  ],
+  "command": "/home/researcher/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64/bin/go test -mod=readonly -tags=test_dep,disable_grpc_modules -count=1 -p=2 -timeout=5m -v -overlay=/tmp/temporal-pr12772-corrected-lzmr_1qp/head-A-overlay.json ./service/history/workflow -run '^TestContextSuite$/^TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear$'",
+  "env": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "GOTOOLCHAIN": "local",
+    "GOCACHE": "/home/researcher/.cache/go-build",
+    "GOPROXY": "https://proxy.golang.org",
+    "GOSUMDB": "sum.golang.org",
+    "GOMAXPROCS": "2",
+    "CGO_ENABLED": "1"
+  },
+  "exit_code": 0,
+  "seconds": 4.252
+}

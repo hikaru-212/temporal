@@ -1,0 +1,11 @@
+go: downloading go.temporal.io/api v1.63.8-0.20261016215345-3926793dec12
+=== RUN   TestContextSuite
+=== RUN   TestContextSuite/TestTaskCompletionBuffer_BudgetReleasedOnFailedMerge
+2026-10-29T14:23:57.179Z	info	Task key range updated	{"number": 0, "next-number": 1048576, "logging-call-at": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter/service/history/shard/task_key_generator.go:155"}
+=== RUN   TestContextSuite/TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear
+2026-10-29T14:23:57.180Z	info	Task key range updated	{"number": 0, "next-number": 1048576, "logging-call-at": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter/service/history/shard/task_key_generator.go:155"}
+--- PASS: TestContextSuite (0.00s)
+    --- PASS: TestContextSuite/TestTaskCompletionBuffer_BudgetReleasedOnFailedMerge (0.00s)
+    --- PASS: TestContextSuite/TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear (0.00s)
+PASS
+ok  	go.temporal.io/server/service/history/workflow	0.025s

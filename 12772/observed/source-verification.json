@@ -1,0 +1,245 @@
+{
+  "method": "Read-only inspection and hash/diff reconstruction of retained artifacts; no test execution.",
+  "base_manifest": {
+    "source": "/tmp/temporal-pr12772-corrected-lzmr_1qp/base-original-manifest.json",
+    "source_sha256": "456ed34a0c0a4179e5664eaea0fa131c398d590ca58fa76001a0a980764232f6",
+    "original_file_count": 4094,
+    "current_file_count": 4094,
+    "changed_files": [
+      "service/history/api/respondworkflowtaskcompleted/api_test.go",
+      "service/history/workflow/context_test.go"
+    ],
+    "missing_files": [],
+    "extra_files": [],
+    "only_test_files_changed": true
+  },
+  "patch_checks": [
+    {
+      "arm": "BASE",
+      "invariant": "A",
+      "source_commit": "fbc3a07d87bdd0c4144188ed394449554aa0875b",
+      "source_path": "service/history/workflow/context_test.go",
+      "original_sha256": "e378db1b9be109c9b3248f2e4194810adc64a3d319dffbbe9aacc05dda866fb2",
+      "executed_sha256": "99eef8c32a30cbfbf031125a701207ab4303d499d10615b8870ad4e01bd1922e",
+      "patch_path": "tests/base-A-test-only.diff",
+      "exact_diff_match": true,
+      "head_only_adds_Logf": false
+    },
+    {
+      "arm": "BASE",
+      "invariant": "B",
+      "source_commit": "fbc3a07d87bdd0c4144188ed394449554aa0875b",
+      "source_path": "service/history/api/respondworkflowtaskcompleted/api_test.go",
+      "original_sha256": "151cbb718674c3293c54071841dcdf392387d848f3aac7b53b0190f9e08f6df6",
+      "executed_sha256": "5c1f91ebaeef213ee498e8202498b5a4a999b250032545b24901bd0f4c0f2a54",
+      "patch_path": "tests/base-B-test-only.diff",
+      "exact_diff_match": true,
+      "head_only_adds_Logf": false
+    },
+    {
+      "arm": "HEAD",
+      "invariant": "A",
+      "source_commit": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+      "source_path": "service/history/workflow/context_test.go",
+      "original_sha256": "8af36ba3872d21f35439d805cab4118c0c0a98bc04cbaa7bf5ec7268e22a01a5",
+      "executed_sha256": "6124b60455f8800396b89848374df1ffd5fdb129d5305c0cac32c608fea52334",
+      "patch_path": "tests/head-A-observation-only.diff",
+      "exact_diff_match": true,
+      "head_only_adds_Logf": true
+    },
+    {
+      "arm": "HEAD",
+      "invariant": "B",
+      "source_commit": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+      "source_path": "service/history/api/respondworkflowtaskcompleted/api_test.go",
+      "original_sha256": "046efedd287c48d1a4152f8bbd10733cd6f3f979e6b5713837f153196d87cea5",
+      "executed_sha256": "4a5b67fdb034336c11a40f506c4207f2f3d645ea4c353e776974a33e5abbc819",
+      "patch_path": "tests/head-B-observation-only.diff",
+      "exact_diff_match": true,
+      "head_only_adds_Logf": true
+    }
+  ],
+  "corrected_matrix": [
+    {
+      "name": "01-base-A",
+      "invariant": "A",
+      "arm": "BASE",
+      "commit": "fbc3a07d87bdd0c4144188ed394449554aa0875b",
+      "exit_code": 1,
+      "observed_values": {
+        "initial": 16,
+        "after_merge": 0
+      },
+      "log_matches_record": true
+    },
+    {
+      "name": "02-head-A",
+      "invariant": "A",
+      "arm": "HEAD",
+      "commit": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+      "exit_code": 0,
+      "observed_values": {
+        "initial": 16,
+        "after_merge": 16,
+        "after_context_cleanup": 16,
+        "after_release": 0
+      },
+      "log_matches_record": true
+    },
+    {
+      "name": "03-base-B",
+      "invariant": "B",
+      "arm": "BASE",
+      "commit": "fbc3a07d87bdd0c4144188ed394449554aa0875b",
+      "exit_code": 1,
+      "observed_values": {
+        "initial": 171,
+        "at_persistence": 0,
+        "after_handler": 0
+      },
+      "log_matches_record": true
+    },
+    {
+      "name": "04-head-B",
+      "invariant": "B",
+      "arm": "HEAD",
+      "commit": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+      "exit_code": 0,
+      "observed_values": {
+        "initial": 171,
+        "at_persistence": 171,
+        "after_handler": 0
+      },
+      "log_matches_record": true
+    }
+  ],
+  "historical_preflight_commands": [
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "git",
+        "cat-file",
+        "-t",
+        "fbc3a07d87bdd0c4144188ed394449554aa0875b"
+      ],
+      "exit_code": 0,
+      "stdout": "commit\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "git",
+        "merge-base",
+        "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+        "01766a34880758f7dad6697621777287b777fbd8"
+      ],
+      "exit_code": 0,
+      "stdout": "fbc3a07d87bdd0c4144188ed394449554aa0875b\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "/home/researcher/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64/bin/go",
+        "version"
+      ],
+      "exit_code": 0,
+      "stdout": "go version go1.27.0 linux/arm64\n",
+      "stderr": ""
+    }
+  ],
+  "historical_final_integrity_commands": [
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "exit_code": 0,
+      "stdout": "review/temporal-12772-pagination-limiter\n",
+      "stderr": ""
+    },
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "git",
+        "diff",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "cwd": "/home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter",
+      "argv": [
+        "git",
+        "diff",
+        "--cached",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "historical_ref_dump": {
+    "before_sha256": "50b610473d264c7c71db08a655ed1193ae430b3219e041d691445ac6a4c64f48",
+    "after_sha256": "50b610473d264c7c71db08a655ed1193ae430b3219e041d691445ac6a4c64f48",
+    "unchanged": true,
+    "full_ref_dump_omitted": "Repository-wide ref listing is unrelated to this minimal package."
+  },
+  "earlier_head_attribution": {
+    "record": "observed/earlier/08-worktree-final.json",
+    "head": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+    "individual_run_records_embed_head": false
+  }
+}

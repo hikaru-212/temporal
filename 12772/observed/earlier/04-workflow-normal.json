@@ -1,0 +1,13 @@
+{
+  "command": "/home/researcher/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64/bin/go test -mod=readonly -tags=test_dep,disable_grpc_modules -count=1 -p=2 -timeout=5m -v ./service/history/workflow -run '^TestContextSuite$/^TestTaskCompletionBuffer_BudgetReleasedOn(MergeAndClear|FailedMerge)$'",
+  "env": {
+    "GOCACHE": "/home/researcher/.cache/go-build",
+    "GOTOOLCHAIN": "local",
+    "GOPROXY": "https://proxy.golang.org",
+    "GOSUMDB": "sum.golang.org",
+    "GOMAXPROCS": "2",
+    "CGO_ENABLED": "1"
+  },
+  "exit_code": 0,
+  "seconds": 53.872
+}

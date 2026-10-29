@@ -1,0 +1,30 @@
+--- BASE/service/history/workflow/context_test.go
++++ BASE-adapted/service/history/workflow/context_test.go
+@@ -756,8 +756,8 @@
+ 	s.Equal(processLimit-page0Size, budget.Used())
+ }
+ 
+-// TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear verifies the process counter
+-// goes back to zero after a successful merge
++// TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear verifies that a successful
++// merge retains the reservation for the transaction owner.
+ func (s *contextSuite) TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear() {
+ 	budget := limiter.NewKeyedBytesLimiter()
+ 	s.workflowContext.paginationLimiter = budget
+@@ -767,11 +767,14 @@
+ 
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(10, 1, intermediatePage(0, "p0")))
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(10, 1, intermediatePage(1, "p1")))
+-	s.Positive(budget.Used())
++	reserved := budget.Used()
++	s.Positive(reserved)
++	s.T().Logf("EVIDENCE A initial=%d", reserved)
+ 
+ 	_, err := s.workflowContext.GetMergedTaskCompletionPages(10, 1, finalPage(2, nil))
+ 	s.NoError(err)
+-	s.Equal(int64(0), budget.Used())
++	s.T().Logf("EVIDENCE A after_merge=%d", budget.Used())
++	s.Equal(reserved, budget.Used(), "successful merge must retain the reservation until transaction owner release")
+ 
+ 	// And after Clear() of a fresh buffer.
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(10, 1, intermediatePage(0, "p0")))

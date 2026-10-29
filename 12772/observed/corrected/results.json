@@ -1,0 +1,69 @@
+{
+  "classification": "VERIFIED BASE RED / HEAD GREEN",
+  "archive_commit": "fbc3a07d87bdd0c4144188ed394449554aa0875b",
+  "base_modified_files": [
+    "service/history/api/respondworkflowtaskcompleted/api_test.go",
+    "service/history/workflow/context_test.go"
+  ],
+  "base_production_unchanged": true,
+  "head_clean": true,
+  "head_commit_unchanged": true,
+  "refs_unchanged": true,
+  "head_overlays_only_add_Logf": true,
+  "new_test_executions": 4,
+  "new_race_executions": 0,
+  "results": [
+    {
+      "name": "01-base-A",
+      "commit": "fbc3a07d87bdd0c4144188ed394449554aa0875b",
+      "exit_code": 1,
+      "values": {
+        "initial": 16,
+        "after_merge": 0
+      },
+      "outcome": "RED",
+      "log": "/tmp/temporal-pr12772-corrected-lzmr_1qp/01-base-A.log",
+      "record": "/tmp/temporal-pr12772-corrected-lzmr_1qp/01-base-A.json"
+    },
+    {
+      "name": "02-head-A",
+      "commit": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+      "exit_code": 0,
+      "values": {
+        "initial": 16,
+        "after_merge": 16,
+        "after_context_cleanup": 16,
+        "after_release": 0
+      },
+      "outcome": "GREEN",
+      "log": "/tmp/temporal-pr12772-corrected-lzmr_1qp/02-head-A.log",
+      "record": "/tmp/temporal-pr12772-corrected-lzmr_1qp/02-head-A.json"
+    },
+    {
+      "name": "03-base-B",
+      "commit": "fbc3a07d87bdd0c4144188ed394449554aa0875b",
+      "exit_code": 1,
+      "values": {
+        "initial": 171,
+        "at_persistence": 0,
+        "after_handler": 0
+      },
+      "outcome": "RED",
+      "log": "/tmp/temporal-pr12772-corrected-lzmr_1qp/03-base-B.log",
+      "record": "/tmp/temporal-pr12772-corrected-lzmr_1qp/03-base-B.json"
+    },
+    {
+      "name": "04-head-B",
+      "commit": "1681a1054efe5967b5730cb8ffe98c3e9bd5182d",
+      "exit_code": 0,
+      "values": {
+        "initial": 171,
+        "at_persistence": 171,
+        "after_handler": 0
+      },
+      "outcome": "GREEN",
+      "log": "/tmp/temporal-pr12772-corrected-lzmr_1qp/04-head-B.log",
+      "record": "/tmp/temporal-pr12772-corrected-lzmr_1qp/04-head-B.json"
+    }
+  ]
+}

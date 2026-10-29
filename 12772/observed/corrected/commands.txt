@@ -1,0 +1,15 @@
+# 01-base-A; exit_code=1
+cd /tmp/temporal-pr12772-corrected-lzmr_1qp/base
+env GIT_OPTIONAL_LOCKS=0 GOTOOLCHAIN=local GOCACHE=/home/researcher/.cache/go-build GOPROXY=https://proxy.golang.org GOSUMDB=sum.golang.org GOMAXPROCS=2 CGO_ENABLED=1 /home/researcher/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64/bin/go test -mod=readonly -tags=test_dep,disable_grpc_modules -count=1 -p=2 -timeout=5m -v ./service/history/workflow -run '^TestContextSuite$/^TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear$'
+
+# 02-head-A; exit_code=0
+cd /home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter
+env GIT_OPTIONAL_LOCKS=0 GOTOOLCHAIN=local GOCACHE=/home/researcher/.cache/go-build GOPROXY=https://proxy.golang.org GOSUMDB=sum.golang.org GOMAXPROCS=2 CGO_ENABLED=1 /home/researcher/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64/bin/go test -mod=readonly -tags=test_dep,disable_grpc_modules -count=1 -p=2 -timeout=5m -v -overlay=/tmp/temporal-pr12772-corrected-lzmr_1qp/head-A-overlay.json ./service/history/workflow -run '^TestContextSuite$/^TestTaskCompletionBuffer_BudgetReleasedOnMergeAndClear$'
+
+# 03-base-B; exit_code=1
+cd /tmp/temporal-pr12772-corrected-lzmr_1qp/base
+env GIT_OPTIONAL_LOCKS=0 GOTOOLCHAIN=local GOCACHE=/home/researcher/.cache/go-build GOPROXY=https://proxy.golang.org GOSUMDB=sum.golang.org GOMAXPROCS=2 CGO_ENABLED=1 /home/researcher/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64/bin/go test -mod=readonly -tags=test_dep,disable_grpc_modules -count=1 -p=2 -timeout=5m -v ./service/history/api/respondworkflowtaskcompleted -run '^TestWorkflowTaskCompletedHandlerSuite$/^TestWorkflowTaskCompletionPagination$/^Merged_pages_stay_reserved_until_the_transaction_is_persisted$'
+
+# 04-head-B; exit_code=0
+cd /home/researcher/oss/worktrees/temporal-review-2/pr-12772-pagination-limiter
+env GIT_OPTIONAL_LOCKS=0 GOTOOLCHAIN=local GOCACHE=/home/researcher/.cache/go-build GOPROXY=https://proxy.golang.org GOSUMDB=sum.golang.org GOMAXPROCS=2 CGO_ENABLED=1 /home/researcher/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.27.0.linux-arm64/bin/go test -mod=readonly -tags=test_dep,disable_grpc_modules -count=1 -p=2 -timeout=5m -v -overlay=/tmp/temporal-pr12772-corrected-lzmr_1qp/head-B-overlay.json ./service/history/api/respondworkflowtaskcompleted -run '^TestWorkflowTaskCompletedHandlerSuite$/^TestWorkflowTaskCompletionPagination$/^Merged_pages_stay_reserved_until_the_transaction_is_persisted$'

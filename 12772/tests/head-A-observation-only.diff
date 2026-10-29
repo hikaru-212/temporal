@@ -1,0 +1,24 @@
+--- HEAD/service/history/workflow/context_test.go
++++ HEAD-log-only/service/history/workflow/context_test.go
+@@ -770,17 +770,21 @@
+ 	s.NoError(s.workflowContext.AppendTaskCompletionPage(10, 1, intermediatePage(1, "p1")))
+ 	reserved := budget.Used()
+ 	s.Positive(reserved)
++	s.T().Logf("EVIDENCE A initial=%d", reserved)
+ 
+ 	_, release, err := s.workflowContext.GetMergedTaskCompletionPages(10, 1, finalPage(2, nil))
+ 	s.NoError(err)
+ 	s.Nil(s.workflowContext.taskCompletionBuffer)
++	s.T().Logf("EVIDENCE A after_merge=%d", budget.Used())
+ 
+ 	// The reservation outlives the buffer until the transaction is persisted.
+ 	s.workflowContext.reconcileTaskCompletionBuffer()
+ 	s.workflowContext.Clear()
++	s.T().Logf("EVIDENCE A after_context_cleanup=%d", budget.Used())
+ 	s.Equal(reserved, budget.Used())
+ 
+ 	release()
++	s.T().Logf("EVIDENCE A after_release=%d", budget.Used())
+ 	s.Equal(int64(0), budget.Used())
+ 
+ 	// And after Clear() of a fresh buffer.
