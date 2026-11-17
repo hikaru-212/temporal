@@ -1,0 +1,1751 @@
+{
+  "schema_version": 1,
+  "issue": "https://github.com/temporalio/sdk-rust/issues/1766",
+  "scope": "Preserved Stage 7B controlled real-Server E2E; not uninstrumented production",
+  "environment": {
+    "temporal_cli": "1.5.1",
+    "temporal_server": "1.29.1",
+    "python": "3.12.3",
+    "platform": "Linux aarch64",
+    "producer_sdks": [
+      "1.34.0",
+      "1.36.1"
+    ],
+    "replayer_sdks": [
+      "1.34.0",
+      "1.36.1"
+    ]
+  },
+  "summary": {
+    "exported_cases": 42,
+    "memo_first_failures_per_replayer": 16,
+    "recorded_update_first_passes_per_replayer": 26,
+    "strict_update_first_same_wft_passes": 23,
+    "memo_in_earlier_wft_passes": 3,
+    "incomplete_attempts_excluded": 3
+  },
+  "notes": [
+    "Original replay_all.py labels every non-memo-first Update WFT as update_first, including three N_ungated histories with memo in an earlier WFT.",
+    "Original replay logs record 16-character hash prefixes; full source SHA-256 values were checked against MANIFEST_7B.txt and the unchanged original files.",
+    "Only four histories and four trace JSON files are distributed; all 42 successful run logs and both original replay logs corroborate the complete matrix.",
+    "Inventory checksums for 91 files not covered by the original manifest were first measured during packaging; they are not retroactive original checksums."
+  ],
+  "replay_logs": {
+    "1.34.0": "replay_all_venv134.log",
+    "1.36.1": "replay_all_venv1361.log"
+  },
+  "packaging_replay_logs": {
+    "1.34.0": "replay-1.34.0.log",
+    "1.36.1": "replay-1.36.1.log"
+  },
+  "incomplete_attempts": [
+    {
+      "case_id": "h6-C1_trailing_query-f6f7f128",
+      "producer_sdk": "1.34.0",
+      "source_file": "e2e_C1_run1.log",
+      "source_sha256": "fa4cf179c9ccd5100786f407974ab2cec5866a55d2900787dd59f5f46e151934",
+      "status": "INCOMPLETE_NO_EXPORTED_HISTORY",
+      "last_trace_kind": "wft1_held_open",
+      "recorded_error": null,
+      "replay_verdict": null
+    },
+    {
+      "case_id": "h6-C1_trailing_query-fbbe244a",
+      "producer_sdk": "1.34.0",
+      "source_file": "e2e_C1_run2.log",
+      "source_sha256": "fa88c4b79acf01de577a5cdcd99e1753cab9dd2f3070b0d745006c675d7cdf87",
+      "status": "INCOMPLETE_NO_EXPORTED_HISTORY",
+      "last_trace_kind": "completion",
+      "recorded_error": "no poller seen for task queue recently, worker may be down",
+      "replay_verdict": null
+    },
+    {
+      "case_id": "h6-S_query_early-feaac8b7",
+      "producer_sdk": "1.34.0",
+      "source_file": "e2e_S_query_early_1.log",
+      "source_sha256": "a6d0d8bb8c371cce696c619ccc042a62601d450ca77d25d6a457b5691e31e4e0",
+      "status": "INCOMPLETE_NO_EXPORTED_HISTORY",
+      "last_trace_kind": "completion",
+      "recorded_error": "no poller seen for task queue recently, worker may be down",
+      "replay_verdict": null
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "C3_no_query-8e45f56f",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-C3_no_query-8e45f56f",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "C3_no_query",
+        "addr": "127.0.0.1:17233",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/C3_no_query-8e45f56f.history.json",
+      "history_sha256": "2daf83a2e01857c8ee6be73ab375c79d035e11a0d8914d6179c4dcdb68992399",
+      "trace_file": "e2e/C3_no_query-h6-C3_no_query-8e45f56f.trace.json",
+      "trace_sha256": "e3e3aefa1da30957f8d109493242dc380c4f1b03c001cf88a09496a6553c1687",
+      "run_log_file": "e2e_C3.log",
+      "run_log_sha256": "7be6a9950609ad2e0751e1691617a79d4267970ae4214c175964343473fe2d96",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "N_ungated-2ac44070",
+      "event_count": 15,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-N_ungated-2ac44070",
+      "update_wft_completed": 13,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 11,
+      "recorded_order": "memo-in-earlier-wft",
+      "committed": [
+        "14:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=11)",
+        "15:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "N_ungated",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/N_ungated-2ac44070.history.json",
+      "history_sha256": "abdeb3e401dc5984da5cf54eced47aef9910713adfc05af0e38c3c85f4901e34",
+      "trace_file": "e2e/N_ungated-h6-N_ungated-2ac44070.trace.json",
+      "trace_sha256": "091a95dad2bee4095a724d24508347ce1ffa3fbf33a32df03faab09e4c6bdcd1",
+      "run_log_file": "e2e_N_ungated_1.log",
+      "run_log_sha256": "6b50bb82bb6c0c2e65c67ba418e1db39be836204764a13ec9f805628fd70b890",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "N_ungated-416eedec",
+      "event_count": 15,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-N_ungated-416eedec",
+      "update_wft_completed": 13,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 11,
+      "recorded_order": "memo-in-earlier-wft",
+      "committed": [
+        "14:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=11)",
+        "15:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "N_ungated",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/N_ungated-416eedec.history.json",
+      "history_sha256": "d2c4fd272db50b8739dd5b7ae83936934de47d43664f2505879efcab80b6d61e",
+      "trace_file": "e2e/N_ungated-h6-N_ungated-416eedec.trace.json",
+      "trace_sha256": "28e42d10213e1a619f7cbe95229ec3206c260e22181a57f1bc130d4e61ee5012",
+      "run_log_file": "e2e_N_ungated_3.log",
+      "run_log_sha256": "394909b68452b32275f5e46c4a4fba9db8b3a4faafd16ea6628bc7563992e949",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "N_ungated-6be21bd2",
+      "event_count": 15,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-N_ungated-6be21bd2",
+      "update_wft_completed": 13,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 11,
+      "recorded_order": "memo-in-earlier-wft",
+      "committed": [
+        "14:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=11)",
+        "15:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "N_ungated",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/N_ungated-6be21bd2.history.json",
+      "history_sha256": "9be96ef04a294f0f6b49d8034b436e59fb5d12ec982b24092c6a2e185dca928d",
+      "trace_file": "e2e/N_ungated-h6-N_ungated-6be21bd2.trace.json",
+      "trace_sha256": "c5a9c7a7bb9dcf406c7d269fc505880df10dd4aa5471769ed4c9a3971634d2ad",
+      "run_log_file": "e2e_N_ungated_2.log",
+      "run_log_sha256": "f6babfb6ced1514dc0827ce6f89a1381473e790349f72892064c06d165a76473",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_noquery-1ea0c7fc",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_noquery-1ea0c7fc",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_noquery",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_noquery-1ea0c7fc.history.json",
+      "history_sha256": "71c643f3d0ce114819e110ea5faac680a1219b60cfb82f1e4bcc418015777042",
+      "trace_file": "e2e/S_noquery-h6-S_noquery-1ea0c7fc.trace.json",
+      "trace_sha256": "d42c808b3a2982eb2566f868ec0785814a2e8b44091174ff346ef0d2873036ef",
+      "run_log_file": "e2e_S_noquery_3.log",
+      "run_log_sha256": "5038ef4ea7361324b0c418652d7b4a87df43b165364f4d46f0326e961cb92308",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_noquery-35c113e3",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_noquery-35c113e3",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_noquery",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_noquery-35c113e3.history.json",
+      "history_sha256": "0efb7df6fc6e466095f7758d186d0d7cb998ead8fd306261cae2cf17c5a1206d",
+      "trace_file": "e2e/S_noquery-h6-S_noquery-35c113e3.trace.json",
+      "trace_sha256": "199f76f33912b953488361386f1d362a306cacbeec81bd4a4a797e8916583972",
+      "run_log_file": "e2e_S_noquery_2.log",
+      "run_log_sha256": "b04addc1b2645c801af5c8fc6f52c14d3367545bec15ad43d312c5c3e51b32f0",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_noquery-5f1aeea9",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_noquery-5f1aeea9",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_noquery",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_noquery-5f1aeea9.history.json",
+      "history_sha256": "c4d5b9826b09e2c18fd1255d5b16277911eab4edb9afc87918e9720e4e4c85be",
+      "trace_file": "e2e/S_noquery-h6-S_noquery-5f1aeea9.trace.json",
+      "trace_sha256": "af5d65e95800f2710f02e35ccc49abe164922492b30fa2c49bcc0b7af245c81c",
+      "run_log_file": "e2e_v1361_S_noquery_1.log",
+      "run_log_sha256": "60b6cb070df3065f5cb32ad3661cbee4cba77c8eac857787aa261e79495d3686",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_noquery-68933a7c",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_noquery-68933a7c",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_noquery",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_noquery-68933a7c.history.json",
+      "history_sha256": "2bbdb838e6861d1e699f039a3fab487ff92179b0103b06e66146baf5d278a5ee",
+      "trace_file": "e2e/S_noquery-h6-S_noquery-68933a7c.trace.json",
+      "trace_sha256": "69a0f9e8a90f06be0fdfb16e82445b5ebaae1315f53556b2236cf48458a312e4",
+      "run_log_file": "e2e_v1361_S_noquery_2.log",
+      "run_log_sha256": "066d922d0b8addc5e271578e2bd6802fe3e483d21107df4259a1803ba60533bf",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_noquery-d52b552b",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_noquery-d52b552b",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_noquery",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": "no-query-control",
+      "history_file": "e2e/S_noquery-d52b552b.history.json",
+      "history_sha256": "c8f2ade7734bd690c5e563db9f857e350601fdcd3e1f53ed4827b65788bdcfb5",
+      "trace_file": "e2e/S_noquery-h6-S_noquery-d52b552b.trace.json",
+      "trace_sha256": "1fba49d4315f3ab78ef08ee7d5bc8f23508f4cd71baf82530e49ba2b8d3f6b7b",
+      "run_log_file": "e2e_S_noquery_1.log",
+      "run_log_sha256": "1a456d8db22b84f71d57fd24eb60e9816d64368dfc3648cad1c67616aa56f622",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-03e93dc0",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-03e93dc0",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-03e93dc0.history.json",
+      "history_sha256": "bfbc42584cb68b5f64d037fe8cfe7789deaa1fcf2784cda1e2456ac16351bddf",
+      "trace_file": "e2e/S_query-h6-S_query-03e93dc0.trace.json",
+      "trace_sha256": "e7f86641635be7cc0f93e6d384b2308d821693363bbf97b8181ab0e9a6df24cc",
+      "run_log_file": "e2e_S_query_run16.log",
+      "run_log_sha256": "b0f5b901ccf97ce141bbfa023478c909e65863a525de5a2583b20cc50a8e3c8e",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-041a7045",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-041a7045",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-041a7045.history.json",
+      "history_sha256": "a5ada856582e69ebb9b6033fe2ff30cfb6e0079723605c626275c72f92486cd9",
+      "trace_file": "e2e/S_query-h6-S_query-041a7045.trace.json",
+      "trace_sha256": "0ca121ac3cb4b330b94dd617c7a21d2dd03a818e5b1fa3a05f7cb7166d28e126",
+      "run_log_file": "e2e_S_query_run10.log",
+      "run_log_sha256": "533e791888bb92512172a4c656837f27bd6324def4874c1c5a4856b623a8f2d2",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-05250848",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-05250848",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-05250848.history.json",
+      "history_sha256": "779085989b652ff79a594ff584ee799d8d95c1dcf90461ba0ae229258772478e",
+      "trace_file": "e2e/S_query-h6-S_query-05250848.trace.json",
+      "trace_sha256": "ffee2e1c086c682639ab582a4cf42152f1763107ab53f762e42621c9403506cc",
+      "run_log_file": "e2e_v1361_S_query_4.log",
+      "run_log_sha256": "43855a0d82edd6064e76e996483acbdcd1cc134d4d98c5a9e84522d52eb797b8",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-0b25b632",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-0b25b632",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": "memo-first-produced-by-1.34.0",
+      "history_file": "e2e/S_query-0b25b632.history.json",
+      "history_sha256": "79dbc24d14acb9dea0c073716b09a7b45d5afa84710f8b85eb00c5b10fbbbca3",
+      "trace_file": "e2e/S_query-h6-S_query-0b25b632.trace.json",
+      "trace_sha256": "1e641c1d4c4afa9d48b8dc2f45948b9bbcbaff01d282e932587158d957c3a2f7",
+      "run_log_file": "e2e_S_query_run3.log",
+      "run_log_sha256": "e4018b8ed740516d1f115f6bfa904d100efc0fca57fc4a9185cb2e6095196234",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-19dc1c9e",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-19dc1c9e",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-19dc1c9e.history.json",
+      "history_sha256": "c00ed88dc36529b5b5c3225468645017fd3dd908f0a490d622ea71f57381c751",
+      "trace_file": "e2e/S_query-h6-S_query-19dc1c9e.trace.json",
+      "trace_sha256": "b9eb8336d44e4f09c3b78d77f112e2606d381f53702e532e26494fc3bbdeea80",
+      "run_log_file": "e2e_v1361_S_query_10.log",
+      "run_log_sha256": "95fef91da22a26ac42c18534fbba6bb6425c8dd5312a87568c2e714c8fef1106",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-24ea1d85",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-24ea1d85",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-24ea1d85.history.json",
+      "history_sha256": "fcf466896c18ffe25d5f29147a7e1941483be1824d08b0f8c06d87f8ac0ea32e",
+      "trace_file": "e2e/S_query-h6-S_query-24ea1d85.trace.json",
+      "trace_sha256": "67ca6b79406d3d0ebcdf0edf1396dcf4278d8fc591f2e8ad58ff6e4326ed21a3",
+      "run_log_file": "e2e_v1361_S_query_2.log",
+      "run_log_sha256": "af446250ba9d713550589112af6e5d67239471aec82af07e036e17eb6b53805b",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-25fd3e58",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-25fd3e58",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-25fd3e58.history.json",
+      "history_sha256": "a39b43d562019ecb97d65e492d22088dfac10d7ee48cffb767c8269c13abaced",
+      "trace_file": "e2e/S_query-h6-S_query-25fd3e58.trace.json",
+      "trace_sha256": "520a87cf74ac16a909160598c44a6f95f45c3e78bfd6a9c48b0c556e9e189fd5",
+      "run_log_file": "e2e_S_query_run12.log",
+      "run_log_sha256": "89f500d7097058dda1cbc34fbbe46978797fca56f19931b8f0708c16e4952a88",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-3a3908c8",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-3a3908c8",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-3a3908c8.history.json",
+      "history_sha256": "0041e07e4b3251e442ecb5ef5b8fdf47f1fb55191a92bf3cb8fdb69c4a47b64e",
+      "trace_file": "e2e/S_query-h6-S_query-3a3908c8.trace.json",
+      "trace_sha256": "ea8126ea9fe107cf7ad3a653ee16eac435d43ae40fdbbc7ab80a5c3453d4e652",
+      "run_log_file": "e2e_S_query_run4.log",
+      "run_log_sha256": "d7c790d72feaa35e8e9a40ed1a40503c6b67b2d9b910ab62bd71362a270c6b7d",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-44063f00",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-44063f00",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-44063f00.history.json",
+      "history_sha256": "0eba1118f1cb7b91ff48f14aa067d9ec47a8b65a8c387af623383f05ac508d97",
+      "trace_file": "e2e/S_query-h6-S_query-44063f00.trace.json",
+      "trace_sha256": "2e7c31652ec2b4efb828534c2cc0f0efc528acc0cf05d5c38fb4ea0fb6a5bbbc",
+      "run_log_file": "e2e_v1361_S_query_3.log",
+      "run_log_sha256": "795037f1296cc61e59eec7e218d054cc9eb1d7940179716641209396f46b9062",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-51e12065",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-51e12065",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-51e12065.history.json",
+      "history_sha256": "4ec0bee8a734c1741f19650f49d63982afd72fee7fc14faa924d4f6ec15c04d2",
+      "trace_file": "e2e/S_query-h6-S_query-51e12065.trace.json",
+      "trace_sha256": "ce3517728e8d6fc48bac9bc1a955e3899eeb18682249f7cc9b4bf0c9b2f9b9ba",
+      "run_log_file": "e2e_S_query_run7.log",
+      "run_log_sha256": "ac38aa561a745e4fc1d68174bd031b4dc6e9bea24e377c74f7c011e3889ddeb7",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-5eb2eb8d",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-5eb2eb8d",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-5eb2eb8d.history.json",
+      "history_sha256": "5ff6d89c2fa9ae77c0ef9fdaf58b526a38a393bca0181832d8ab3dfacbc983d6",
+      "trace_file": "e2e/S_query-h6-S_query-5eb2eb8d.trace.json",
+      "trace_sha256": "d6d9e31b53acc9e1bede9af45e6047970cdfa72a24766e6f73682247c991e0c6",
+      "run_log_file": "e2e_S_query_run2.log",
+      "run_log_sha256": "da3c1a68901890e609986c5be92411d80bcf4981cc84e4a98f2ee38a4c82b955",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-6aec5f04",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-6aec5f04",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-6aec5f04.history.json",
+      "history_sha256": "9fc01b8c1dc559ce78f8b1ed0b0b9e485e64a64c38da9104ac199b3e31d883f1",
+      "trace_file": "e2e/S_query-h6-S_query-6aec5f04.trace.json",
+      "trace_sha256": "3b47963070f7062abf3ff8467baa706a739b0ba900c63d5ea5dbb6a87a2dbb6f",
+      "run_log_file": "e2e_v1361_S_query_7.log",
+      "run_log_sha256": "7d4997872461ce11ae673659d3b73d5300e85f34b211c111ce9a5c8e25c1783f",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-75b3f6a2",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-75b3f6a2",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 0,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-75b3f6a2.history.json",
+      "history_sha256": "112be9fb63ae1bee8066c8836c5c34aaeed058b2d7145d0a4973eb210cd80d26",
+      "trace_file": "e2e/S_query-h6-S_query-75b3f6a2.trace.json",
+      "trace_sha256": "095f35d60966318bf6738e916b7e5f7418af705e92d8b19f0f37d835db1d97a7",
+      "run_log_file": "e2e_S_query_uncached_2.log",
+      "run_log_sha256": "4fbce2f0604eca7b5724b450f1f91daa44316e5c302b36dfa792c0320522b5c6",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-77f7d806",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-77f7d806",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-77f7d806.history.json",
+      "history_sha256": "14d8fa04427ef607cd12c6fd0204a8a0278acc071897ac1d927b93522058cb1f",
+      "trace_file": "e2e/S_query-h6-S_query-77f7d806.trace.json",
+      "trace_sha256": "1fc156e2feba429160283a8ac60fa8e747a1dfd9ac8a546e6b986e1962bc095b",
+      "run_log_file": "e2e_S_query_run15.log",
+      "run_log_sha256": "9e98fab52192debb2920789bf00a4a040f28d96ced6339d0a910e723381b690c",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-7d03e4ee",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-7d03e4ee",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 0,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-7d03e4ee.history.json",
+      "history_sha256": "be0594ed01dda24906c66e5fa8beb57244f51b68ee8ac5b1c559f1ee862090ab",
+      "trace_file": "e2e/S_query-h6-S_query-7d03e4ee.trace.json",
+      "trace_sha256": "4c97c47051401e79eea76e5107d16507942861222cbeac85f33cfbe5ea7acbf5",
+      "run_log_file": "e2e_S_query_uncached_1.log",
+      "run_log_sha256": "02e4dc62f1dbf6ee571eabee32ba4df5f9ae6e4c0c0615d503ad7052694c6b4b",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-868807be",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-868807be",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-868807be.history.json",
+      "history_sha256": "45a4fae5a41d09035442eb837bd34d49ddb47932e7c641c227a4c91f8feeff95",
+      "trace_file": "e2e/S_query-h6-S_query-868807be.trace.json",
+      "trace_sha256": "80f5770bbea39aeff3f44a675f465ee2c87898bfb69ea86f139c9e97790a7b1b",
+      "run_log_file": "e2e_S_query_run9.log",
+      "run_log_sha256": "aa4a348c44adf56050f613da2787f2eff24b5e9fd8b6c37fe829e68628719db2",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-879d89d3",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-879d89d3",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-879d89d3.history.json",
+      "history_sha256": "450de35edb250b593512aac343aab0c1c3af66ff89b727af92286e9decb8cc45",
+      "trace_file": "e2e/S_query-h6-S_query-879d89d3.trace.json",
+      "trace_sha256": "f63ee905f28d1db36dae786e30ab015d3654a3f7abd9ba618cab0179bb1f2efe",
+      "run_log_file": "e2e_S_query_run8.log",
+      "run_log_sha256": "d144ceabe354a44048e38fb8c80d9682694574b2fa22a3ddd8f459bf32593cc2",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-8f8b4436",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-8f8b4436",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-8f8b4436.history.json",
+      "history_sha256": "265d3a574b9bb4c9cf3f708ddf6cef319f561e1ae68cf6b562b9c01c5c3177f3",
+      "trace_file": "e2e/S_query-h6-S_query-8f8b4436.trace.json",
+      "trace_sha256": "248b8e98ceace09b9f30b1e3cfdfb76f691e515696079d1ccabbd11ede785e28",
+      "run_log_file": "e2e_S_query_run13.log",
+      "run_log_sha256": "370766088250a42298dda49098a345335f435d59c05d7e7ba42046c959c12091",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-9e5e283b",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-9e5e283b",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-9e5e283b.history.json",
+      "history_sha256": "3636a07789b465e7a4afb770e91e659afbea4ff879c76ce172c3a0ee23fcc341",
+      "trace_file": "e2e/S_query-h6-S_query-9e5e283b.trace.json",
+      "trace_sha256": "f15ab484fa2c6d646d0b19e5825dc90cb137d7344d39e648d0194b0bdaed1f56",
+      "run_log_file": "e2e_v1361_S_query_6.log",
+      "run_log_sha256": "6baa85a21c25792ff39db64546350bda81a32546c201db02bcf1bcad09373c66",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-a3c9cca8",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-a3c9cca8",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-a3c9cca8.history.json",
+      "history_sha256": "fe38d67e82cfe4e968a4588d87ba16f176c278013a313205117a67757aaa938c",
+      "trace_file": "e2e/S_query-h6-S_query-a3c9cca8.trace.json",
+      "trace_sha256": "16baa95c3fe27795a151d0f48c7b6acfa98c6a3a9fa95b8a95d98df26507247c",
+      "run_log_file": "e2e_S_query_run14.log",
+      "run_log_sha256": "4d8a94abea824887a733fd1dcef47078a8191892cec0ddc7f77872ef2992b7ae",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-a47bb315",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-a47bb315",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 0,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-a47bb315.history.json",
+      "history_sha256": "ee1fab59b22edf1a414ad92731ca95c48e08e8350a588fc7c12b45ab6632534f",
+      "trace_file": "e2e/S_query-h6-S_query-a47bb315.trace.json",
+      "trace_sha256": "77d1e9376bcc0d708350b2253084ba63ba7bd3ea2244d044224368cafaab67d2",
+      "run_log_file": "e2e_S_query_uncached_4.log",
+      "run_log_sha256": "d986d729dd265ae07642081e0913bd0421110996f4ccefcd8598a0df8f31304e",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-a5cc6cfa",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-a5cc6cfa",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-a5cc6cfa.history.json",
+      "history_sha256": "2f2b26d16fbbc6030095ea05a8beba5bad6e89e93a375cf0e91b1d8800a817d4",
+      "trace_file": "e2e/S_query-h6-S_query-a5cc6cfa.trace.json",
+      "trace_sha256": "30c92ee6f1ce559533980194bdc44532dd4d2ec6310fc0f6ed9b103ee0e42134",
+      "run_log_file": "e2e_v1361_S_query_9.log",
+      "run_log_sha256": "83bd02c7062de1df12f5c6d56fba6cb6f236b48de9d2b7e7c15a06b2288938b7",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-a866e721",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-a866e721",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-a866e721.history.json",
+      "history_sha256": "b9f7820142e0d8c603818a6cbafab93ee1e4da6ac726c5df9e50cf6796b37bb4",
+      "trace_file": "e2e/S_query-h6-S_query-a866e721.trace.json",
+      "trace_sha256": "e4a60324af7455bb108e73e6594f29533cc1d6fa2d8113376411dfa958be82db",
+      "run_log_file": "e2e_S_query_run5.log",
+      "run_log_sha256": "e464f953e3278c5b75fc49eadd52a1d93bdaf9a9209d17428f6d184f7afec9af",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-a9330a60",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-a9330a60",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-a9330a60.history.json",
+      "history_sha256": "2c675eb4f6bf20ae7c58f0d4e8166e2fe70bb244a39248ca087ad82b934330e3",
+      "trace_file": "e2e/S_query-h6-S_query-a9330a60.trace.json",
+      "trace_sha256": "9a35e2f3edf0046edf7759544fc4b6cd6d97f31d459b4b47d00fd66140498d94",
+      "run_log_file": "e2e_v1361_S_query_5.log",
+      "run_log_sha256": "e8b6b4df893bf9ff78ba87ee7ef74ec5db757358f4e4bf8f0002ab1dd41828f8",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-bc995687",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-bc995687",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": "memo-first-produced-by-1.36.1",
+      "history_file": "e2e/S_query-bc995687.history.json",
+      "history_sha256": "2a31abfd76951a6f139b98a46c122e5cc1f50279381fdb060232fef7de46c069",
+      "trace_file": "e2e/S_query-h6-S_query-bc995687.trace.json",
+      "trace_sha256": "f9dda0ea2ab0bfdda12f647441e041de039621ea0fae9473946ae8899f2569a1",
+      "run_log_file": "e2e_v1361_S_query_1.log",
+      "run_log_sha256": "cc7091323e0792d885f744a15e313b45bf664c1f3498bd71439c9dabc76ac3ad",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-bf3f3793",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-bf3f3793",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": "query-present-update-first-control",
+      "history_file": "e2e/S_query-bf3f3793.history.json",
+      "history_sha256": "d9a9bc9a2a793145308c13f080539703ad87f6a295dfeffab605587450f7ba94",
+      "trace_file": "e2e/S_query-h6-S_query-bf3f3793.trace.json",
+      "trace_sha256": "739472b5f46537d27b87088debd1ce0e5d344d254e891726cb5b1e53b46d05ff",
+      "run_log_file": "e2e_S_query_run1.log",
+      "run_log_sha256": "117b6c17d3135cfb7d5b85b9be99307988998652377f99b0c6cf62eb8392f062",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-c2b9f6aa",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-c2b9f6aa",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-c2b9f6aa.history.json",
+      "history_sha256": "3d2951efb8c2f318b597a8745ba09d25cbc162032e1eb23db81aeddf31ee3288",
+      "trace_file": "e2e/S_query-h6-S_query-c2b9f6aa.trace.json",
+      "trace_sha256": "5b6893faf9dbb138b4cc9058769c16f5aa331f757ae0257a79b69478cf4a2900",
+      "run_log_file": "e2e_S_query_run6.log",
+      "run_log_sha256": "590bf7c4a9f6eb53d118c19f6df9782a89db5401e260565b294308db2a519f86",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-d4980399",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-d4980399",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 0,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-d4980399.history.json",
+      "history_sha256": "ba1e18f571c21c0ec13387daa45bf68afa7dbaf789c11d78efeb0f87bd76edc8",
+      "trace_file": "e2e/S_query-h6-S_query-d4980399.trace.json",
+      "trace_sha256": "50db88ff6c7b225b4829d132791bde23b1605ecbcea72f96cb0ec99770e6e64c",
+      "run_log_file": "e2e_S_query_uncached_3.log",
+      "run_log_sha256": "f2c40b97d110eba9a3b30b07caddf2e0da3531e7601e6950b60a2b0e6795a67c",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-dd17b9a1",
+      "event_count": 12,
+      "producer_sdk": "1.36.1",
+      "workflow_id": "h6-S_query-dd17b9a1",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-dd17b9a1.history.json",
+      "history_sha256": "e23902545ca9eb320d45a24862eac996eb6ba15b15987644b86c5a9da6ec8e6c",
+      "trace_file": "e2e/S_query-h6-S_query-dd17b9a1.trace.json",
+      "trace_sha256": "e1e24e35bb2af371b27ce80f3947893c9cd7e95c7bbbef86370085c4037b0374",
+      "run_log_file": "e2e_v1361_S_query_8.log",
+      "run_log_sha256": "8df7af45bbaae1007e5bde0aaf53285b469c34dd6e8a9ca1df386ef0eff6428b",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-e354dd6c",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-e354dd6c",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 0,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-e354dd6c.history.json",
+      "history_sha256": "2545cd34919e086907cb5fb07045c3a848002290ea04a8a12855c595ce9509e7",
+      "trace_file": "e2e/S_query-h6-S_query-e354dd6c.trace.json",
+      "trace_sha256": "9881d3ee1fd6bd197e77ca8562c54a71ecf349b5cc910e5c3122fa4f10feaf75",
+      "run_log_file": "e2e_S_query_uncached_5.log",
+      "run_log_sha256": "cb6282a2cee15b99a826328d1496396ffccc953be7a0f981a0969fa53811c284",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query-ef6fd2bf",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query-ef6fd2bf",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "update-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "11:WORKFLOW_EXECUTION_UPDATE_COMPLETED",
+        "12:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)"
+      ],
+      "conditions": {
+        "case": "S_query",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query-ef6fd2bf.history.json",
+      "history_sha256": "725b11daf7cfffdf284ca9d35c693ec0f5ba98b9a64e414f44e4e906129b6ad6",
+      "trace_file": "e2e/S_query-h6-S_query-ef6fd2bf.trace.json",
+      "trace_sha256": "912549d1299730b0dc58204feaa88bdd7d85c4f2f4b8a6b071cd60575c6e7bb3",
+      "run_log_file": "e2e_S_query_run11.log",
+      "run_log_sha256": "603976e8a5f78831b0e0b3c79ac09f6308270ca81c11bfd05d9340015a219f96",
+      "replays": {
+        "1.34.0": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        },
+        "1.36.1": {
+          "verdict": "PASS",
+          "recorded_result": "PASS"
+        }
+      }
+    },
+    {
+      "case_id": "S_query_early-262967e5",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query_early-262967e5",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query_early",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query_early-262967e5.history.json",
+      "history_sha256": "c4bba46ac0a08b06fa6d3b678dbf5705427e8d78333cd571c11ed48946f0665e",
+      "trace_file": "e2e/S_query_early-h6-S_query_early-262967e5.trace.json",
+      "trace_sha256": "2f8fe5958fca91dc1f461195769278e145068a0e2fb28b6a27ab30fe20d0c2a3",
+      "run_log_file": "e2e_S_query_early_3.log",
+      "run_log_sha256": "88397d56081f3aeec8ee8f99aa2a4dd5b23396cdad963ec37bf4c563e87ae8e8",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    },
+    {
+      "case_id": "S_query_early-b8b10eba",
+      "event_count": 12,
+      "producer_sdk": "1.34.0",
+      "workflow_id": "h6-S_query_early-b8b10eba",
+      "update_wft_completed": 9,
+      "memo_wft_completed": 9,
+      "accepted_request_sequencing_event_id": 7,
+      "recorded_order": "memo-first-same-wft",
+      "committed": [
+        "10:WORKFLOW_PROPERTIES_MODIFIED(wftCompleted=9)",
+        "11:WORKFLOW_EXECUTION_UPDATE_ACCEPTED(seq=7)",
+        "12:WORKFLOW_EXECUTION_UPDATE_COMPLETED"
+      ],
+      "conditions": {
+        "case": "S_query_early",
+        "addr": "127.0.0.1:17433",
+        "cache": 1000,
+        "sticky_timeout_s": 60.0
+      },
+      "representative_role": null,
+      "history_file": "e2e/S_query_early-b8b10eba.history.json",
+      "history_sha256": "868f032140eb8a502a9deca942617998e8be1ffe8e9d09845f2c0ef1e81b5fc9",
+      "trace_file": "e2e/S_query_early-h6-S_query_early-b8b10eba.trace.json",
+      "trace_sha256": "16ba853b8472e8b2129f97b7cf9feeb83ffabf1ebc109e10344d902e8fd529bb",
+      "run_log_file": "e2e_S_query_early_2.log",
+      "run_log_sha256": "347f783eb36c119a4720c582a5c6865f3081cd8f649f8b11e03d9f2a95ff9a8f",
+      "replays": {
+        "1.34.0": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        },
+        "1.36.1": {
+          "verdict": "FAIL",
+          "recorded_result": "TMPRL1100 Update machine does not handle this event: HistoryEvent(id: 10, WorkflowPropertiesModified)"
+        }
+      }
+    }
+  ],
+  "archives": {
+    "reproducer.tar.gz": {
+      "sha256": "6cb61469bb4ad64c1cd92cacf67899083af3787227ae866d3d39f6644c581667",
+      "members_sha256": {
+        "reproducer/SETUP.md": "b6f737575b76ba48442b0ab9c0aa252d93126169707937eb068f52598577eac1",
+        "reproducer/SHA256SUMS": "420bc53547e598d24648c70e512d5e032996eab862ef88795148b171b38007a1",
+        "reproducer/h6_e2e.py": "295f49a7335ad83490b8b4c80c32507397df7674d5fb1995b96cd10f2b92a7ee",
+        "reproducer/provenance/original-cli-release-checksums.txt": "1b674a6e62e2e582cfd5cd84fa09f58844a2507d4621e0f4278a587ef9095a90",
+        "reproducer/provenance/original-sdk-1.34.0-requirement.txt": "08bd8e92fca5a69a149b4920c82bb55c74f03f5e783db9c6ed81a196d9e3748d",
+        "reproducer/provenance/original-sdk-1.36.1-requirement.txt": "771a15070cba13091447b48c9b64473a8290cd7d807db692f1af7a41ef76071a",
+        "reproducer/replay_all.py": "0b3936e0e46bdfbd835d45ce2c3e74c189757c80bde57662287352430f51d426",
+        "reproducer/requirements-1.34.0.txt": "c740398e78b8799eb52d447b260f0b211cfac360df8f7f5464ad87e2ab5c9e0f",
+        "reproducer/requirements-1.36.1.txt": "c9c8b2ed12457792a5eae122fa5cc84fb548dfc62445edd68ca449229aeb8b20"
+      }
+    },
+    "evidence.tar.gz": {
+      "sha256": "d39caa68d1b3d062e6596ebdd10c2a01522b78b4948cbc679eaa92808aa1d06b",
+      "members_sha256": {
+        "evidence/MANIFEST_7B.txt": "346bed5b3592144e26ce69d2ef02a73625938bc120ec74f97e1803d4c52c1772",
+        "evidence/SHA256SUMS": "260284ecd36f49780711f6ff6292b2035bbcd0581ed4dd6863d63a8ac4ddab94",
+        "evidence/e2e/S_noquery-d52b552b.history.json": "c8f2ade7734bd690c5e563db9f857e350601fdcd3e1f53ed4827b65788bdcfb5",
+        "evidence/e2e/S_noquery-h6-S_noquery-d52b552b.trace.json": "1fba49d4315f3ab78ef08ee7d5bc8f23508f4cd71baf82530e49ba2b8d3f6b7b",
+        "evidence/e2e/S_query-0b25b632.history.json": "79dbc24d14acb9dea0c073716b09a7b45d5afa84710f8b85eb00c5b10fbbbca3",
+        "evidence/e2e/S_query-bc995687.history.json": "2a31abfd76951a6f139b98a46c122e5cc1f50279381fdb060232fef7de46c069",
+        "evidence/e2e/S_query-bf3f3793.history.json": "d9a9bc9a2a793145308c13f080539703ad87f6a295dfeffab605587450f7ba94",
+        "evidence/e2e/S_query-h6-S_query-0b25b632.trace.json": "1e641c1d4c4afa9d48b8dc2f45948b9bbcbaff01d282e932587158d957c3a2f7",
+        "evidence/e2e/S_query-h6-S_query-bc995687.trace.json": "f9dda0ea2ab0bfdda12f647441e041de039621ea0fae9473946ae8899f2569a1",
+        "evidence/e2e/S_query-h6-S_query-bf3f3793.trace.json": "739472b5f46537d27b87088debd1ce0e5d344d254e891726cb5b1e53b46d05ff",
+        "evidence/e2e_C3.log": "7be6a9950609ad2e0751e1691617a79d4267970ae4214c175964343473fe2d96",
+        "evidence/e2e_N_ungated_1.log": "6b50bb82bb6c0c2e65c67ba418e1db39be836204764a13ec9f805628fd70b890",
+        "evidence/e2e_N_ungated_2.log": "f6babfb6ced1514dc0827ce6f89a1381473e790349f72892064c06d165a76473",
+        "evidence/e2e_N_ungated_3.log": "394909b68452b32275f5e46c4a4fba9db8b3a4faafd16ea6628bc7563992e949",
+        "evidence/e2e_S_noquery_1.log": "1a456d8db22b84f71d57fd24eb60e9816d64368dfc3648cad1c67616aa56f622",
+        "evidence/e2e_S_noquery_2.log": "b04addc1b2645c801af5c8fc6f52c14d3367545bec15ad43d312c5c3e51b32f0",
+        "evidence/e2e_S_noquery_3.log": "5038ef4ea7361324b0c418652d7b4a87df43b165364f4d46f0326e961cb92308",
+        "evidence/e2e_S_query_early_2.log": "347f783eb36c119a4720c582a5c6865f3081cd8f649f8b11e03d9f2a95ff9a8f",
+        "evidence/e2e_S_query_early_3.log": "88397d56081f3aeec8ee8f99aa2a4dd5b23396cdad963ec37bf4c563e87ae8e8",
+        "evidence/e2e_S_query_run1.log": "117b6c17d3135cfb7d5b85b9be99307988998652377f99b0c6cf62eb8392f062",
+        "evidence/e2e_S_query_run10.log": "533e791888bb92512172a4c656837f27bd6324def4874c1c5a4856b623a8f2d2",
+        "evidence/e2e_S_query_run11.log": "603976e8a5f78831b0e0b3c79ac09f6308270ca81c11bfd05d9340015a219f96",
+        "evidence/e2e_S_query_run12.log": "89f500d7097058dda1cbc34fbbe46978797fca56f19931b8f0708c16e4952a88",
+        "evidence/e2e_S_query_run13.log": "370766088250a42298dda49098a345335f435d59c05d7e7ba42046c959c12091",
+        "evidence/e2e_S_query_run14.log": "4d8a94abea824887a733fd1dcef47078a8191892cec0ddc7f77872ef2992b7ae",
+        "evidence/e2e_S_query_run15.log": "9e98fab52192debb2920789bf00a4a040f28d96ced6339d0a910e723381b690c",
+        "evidence/e2e_S_query_run16.log": "b0f5b901ccf97ce141bbfa023478c909e65863a525de5a2583b20cc50a8e3c8e",
+        "evidence/e2e_S_query_run2.log": "da3c1a68901890e609986c5be92411d80bcf4981cc84e4a98f2ee38a4c82b955",
+        "evidence/e2e_S_query_run3.log": "e4018b8ed740516d1f115f6bfa904d100efc0fca57fc4a9185cb2e6095196234",
+        "evidence/e2e_S_query_run4.log": "d7c790d72feaa35e8e9a40ed1a40503c6b67b2d9b910ab62bd71362a270c6b7d",
+        "evidence/e2e_S_query_run5.log": "e464f953e3278c5b75fc49eadd52a1d93bdaf9a9209d17428f6d184f7afec9af",
+        "evidence/e2e_S_query_run6.log": "590bf7c4a9f6eb53d118c19f6df9782a89db5401e260565b294308db2a519f86",
+        "evidence/e2e_S_query_run7.log": "ac38aa561a745e4fc1d68174bd031b4dc6e9bea24e377c74f7c011e3889ddeb7",
+        "evidence/e2e_S_query_run8.log": "d144ceabe354a44048e38fb8c80d9682694574b2fa22a3ddd8f459bf32593cc2",
+        "evidence/e2e_S_query_run9.log": "aa4a348c44adf56050f613da2787f2eff24b5e9fd8b6c37fe829e68628719db2",
+        "evidence/e2e_S_query_uncached_1.log": "02e4dc62f1dbf6ee571eabee32ba4df5f9ae6e4c0c0615d503ad7052694c6b4b",
+        "evidence/e2e_S_query_uncached_2.log": "4fbce2f0604eca7b5724b450f1f91daa44316e5c302b36dfa792c0320522b5c6",
+        "evidence/e2e_S_query_uncached_3.log": "f2c40b97d110eba9a3b30b07caddf2e0da3531e7601e6950b60a2b0e6795a67c",
+        "evidence/e2e_S_query_uncached_4.log": "d986d729dd265ae07642081e0913bd0421110996f4ccefcd8598a0df8f31304e",
+        "evidence/e2e_S_query_uncached_5.log": "cb6282a2cee15b99a826328d1496396ffccc953be7a0f981a0969fa53811c284",
+        "evidence/e2e_v1361_S_noquery_1.log": "60b6cb070df3065f5cb32ad3661cbee4cba77c8eac857787aa261e79495d3686",
+        "evidence/e2e_v1361_S_noquery_2.log": "066d922d0b8addc5e271578e2bd6802fe3e483d21107df4259a1803ba60533bf",
+        "evidence/e2e_v1361_S_query_1.log": "cc7091323e0792d885f744a15e313b45bf664c1f3498bd71439c9dabc76ac3ad",
+        "evidence/e2e_v1361_S_query_10.log": "95fef91da22a26ac42c18534fbba6bb6425c8dd5312a87568c2e714c8fef1106",
+        "evidence/e2e_v1361_S_query_2.log": "af446250ba9d713550589112af6e5d67239471aec82af07e036e17eb6b53805b",
+        "evidence/e2e_v1361_S_query_3.log": "795037f1296cc61e59eec7e218d054cc9eb1d7940179716641209396f46b9062",
+        "evidence/e2e_v1361_S_query_4.log": "43855a0d82edd6064e76e996483acbdcd1cc134d4d98c5a9e84522d52eb797b8",
+        "evidence/e2e_v1361_S_query_5.log": "e8b6b4df893bf9ff78ba87ee7ef74ec5db757358f4e4bf8f0002ab1dd41828f8",
+        "evidence/e2e_v1361_S_query_6.log": "6baa85a21c25792ff39db64546350bda81a32546c201db02bcf1bcad09373c66",
+        "evidence/e2e_v1361_S_query_7.log": "7d4997872461ce11ae673659d3b73d5300e85f34b211c111ce9a5c8e25c1783f",
+        "evidence/e2e_v1361_S_query_8.log": "8df7af45bbaae1007e5bde0aaf53285b469c34dd6e8a9ca1df386ef0eff6428b",
+        "evidence/e2e_v1361_S_query_9.log": "83bd02c7062de1df12f5c6d56fba6cb6f236b48de9d2b7e7c15a06b2288938b7",
+        "evidence/recheck/environment-1.34.0.json": "4268600ba67ecf8d97a29c5286c7aaca0eace364f6e076218516b6bd17fa1925",
+        "evidence/recheck/environment-1.36.1.json": "82904e82021acd30d1108b68f8af3dbd7fca293871c31f752d4e77172ddce500",
+        "evidence/recheck/replay-1.34.0.log": "41554753518b7fe208244516e7cc0604bdc59c115719a89a539d8a003c828d7e",
+        "evidence/recheck/replay-1.36.1.log": "2004e8d5045438fbf003110cf61648217df8fd57c361b65eb40cfc97fd668206",
+        "evidence/replay_all_venv134.log": "127bb8a4404a4e3f898bee29f9b68941ee06e184af1c9ac582b4cd251b88efae",
+        "evidence/replay_all_venv1361.log": "ebf3a774b666a55646d9e660ec76aa8bf0b5337811694a81f19df782c46bb1ec",
+        "evidence/server_S1.log": "f9af3ec5747614a44ba75ff3c909541f705a5d7b4e0b7ea9c88b070f45ed0eb2",
+        "evidence/server_S2.log": "935fe93bfa161c37a1984b5b073b3e13e2e1213135f2cdd6a70bedbc09ddd6a3",
+        "evidence/server_S3.log": "64e745e65d9d83387c4c2e79ad0295f6dd80efa7fa780cbeacff807110d5779e",
+        "evidence/source-inventory.json": "79b7e7ebf46dd495d0a33553ee3c81614ef8b60dd17fba5b0f104c808bde3765"
+      }
+    }
+  }
+}
