@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "issue": "https://github.com/temporalio/sdk-rust/issues/1766",
-  "scope": "Preserved Stage 7B controlled real-Server E2E; not uninstrumented production",
+  "scope": "Controlled real-Server memo/Update replay reproduction; not uninstrumented production",
   "environment": {
     "temporal_cli": "1.5.1",
     "temporal_server": "1.29.1",
