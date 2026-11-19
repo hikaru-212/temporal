@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "subject": "temporalio/sdk-rust PR #1819: cold replay merges two separately recorded Stream read pages into one activation",
+  "pull_request": "https://github.com/temporalio/sdk-rust/pull/1819",
+  "verdict": "bug reproduced on a real Temporal dev Server",
+  "sdk_rust": {
+    "repository": "https://github.com/temporalio/sdk-rust.git",
+    "sha": "f858a1b0901f41255e3d00ca4ce81b86d05044d9",
+    "observed_as": "refs/pull/1819/head on 2026-11-19",
+    "test_patch_sha256": "b0767b26140962b237fb204d5aaff2ecf1e913ac19aa65c33a1cd0e64a34d15d",
+    "test_file_sha256": "1647672099a160b21b6455fee6c590598e7c389bffd1e38e6af645c54f888db2",
+    "test": "core_tests::streams::investigation_1819_real::investigation_real_server_rejected_update_cold_replay"
+  },
+  "temporal_cli": {
+    "version": "1.8.3-server-1.32.0-162.0",
+    "server_version": "1.32.0-162.0",
+    "persistence": "in-memory (start-dev)",
+    "linux_arm64_archive_sha256": "ebf79ea0692965d30d2ae5b95d9a518e4dacf3e43708fcdf87a6fcb0edd58f95",
+    "linux_arm64_binary_sha256": "1f1bb3a5965532fcb21dc02053604fee7f6d5b47d8e556e7d4e7298397a45b03"
+  },
+  "verification_platform": {
+    "os": "Linux 6.8.0-149-generic",
+    "arch": "aarch64",
+    "rustc": "1.100.0",
+    "protoc": "3.21.12",
+    "other_platforms": "not tested"
+  },
+  "observed": {
+    "timer_per_page": {
+      "w2_workflow_task": {"scheduled": 7, "started": 8, "completed": 9},
+      "update_request_sequencing_event_id": 7,
+      "w2_marker": {"seq": 1, "count": 2, "page_counts": [1, 1], "page_activations": [1, 1], "records": ["p1", "p2"], "end": null},
+      "w2_marker_absolute_activations": [1, 2],
+      "live_w2_reads_by_activation": [[], [["p1"]], [["p2"]]],
+      "replay_w2_reads_by_activation": [[["p1", "p2"]]],
+      "live_w2_timers_by_activation": [[], [2], [3]],
+      "replay_w2_timers": [2],
+      "history_w2_timer_started": [{"event_id": 10, "timer_id": "2"}, {"event_id": 11, "timer_id": "3"}],
+      "replay_eviction": {
+        "reason": "Nondeterminism",
+        "event_id": 11,
+        "message": "[TMPRL1100] Nondeterminism error: No command scheduled for event HistoryEvent(id: 11, TimerStarted)"
+      }
+    },
+    "plain": {
+      "w2_workflow_task": {"scheduled": 6, "started": 7, "completed": 8},
+      "update_request_sequencing_event_id": 6,
+      "w2_marker": {"seq": 1, "count": 2, "page_counts": [1, 1], "page_activations": [1, 1], "records": ["p1", "p2"], "end": null},
+      "w2_marker_absolute_activations": [1, 2],
+      "live_w2_reads_by_activation": [[], [["p1"]], [["p2"]]],
+      "replay_w2_reads_by_activation": [[["p1", "p2"]]],
+      "live_w2_timers_by_activation": [[], [], []],
+      "replay_w2_timers": [],
+      "replay_eviction": {"reason": "LangRequested", "message": "Always evict workflows after replay"}
+    }
+  },
+  "runs": [
+    {
+      "name": "clean-checkout",
+      "description": "Detached checkout of the pinned SHA with only the test-only patch; archived verified CLI; this run is the one in evidence.tar.gz",
+      "date": "2026-11-19",
+      "build_exit_status": 0,
+      "test_exit_status": 0,
+      "test_result": "1 passed; 800 filtered out",
+      "assertions": "all passed for plain and timer_per_page"
+    },
+    {
+      "name": "assertion-hardened-repeats",
+      "description": "Three earlier executions of the same test file in the private research worktree (which also held two other investigation-only tests); kept in the private archive",
+      "date": "2026-11-19",
+      "executions": 3,
+      "test_exit_status": [0, 0, 0],
+      "fresh_workflows": 6,
+      "assertions": "all passed in every execution"
+    },
+    {
+      "name": "reproduce.sh-default",
+      "description": "Final acceptance: bash reproduce.sh with no options (GitHub fetch of the pinned SHA, official CLI download and checksum, fresh Cargo target)",
+      "date": "2026-11-19",
+      "started_utc": "2026-11-19T15:59:31Z",
+      "finished_utc": "2026-11-19T16:03:00Z",
+      "platform": "Linux 6.8.0-149-generic aarch64",
+      "cli_archive_sha256_verified": "ebf79ea0692965d30d2ae5b95d9a518e4dacf3e43708fcdf87a6fcb0edd58f95",
+      "cli_binary_sha256_verified": "1f1bb3a5965532fcb21dc02053604fee7f6d5b47d8e556e7d4e7298397a45b03",
+      "build": "fresh target, CARGO_BUILD_JOBS=1, finished in 3m 03s on this machine with a warm Cargo registry cache",
+      "script_exit_status": 0,
+      "test_result": "1 passed; 800 filtered out",
+      "assertions": "all passed for plain and timer_per_page",
+      "history_cross_check": "both new Histories decoded independently: W2 marker page_counts [1,1], page_activations [1,1], records [p1,p2]; TimerStarted 10 (timer 2) and 11 (timer 3) owned by W2; no Update events",
+      "server_stopped_by_script": true
+    }
+  ],
+  "package": {
+    "archives": {
+      "reproducer.tar.gz": "872bfbe5a52adb5739a99725192cdf93b76302d6173e490d481d79ba16149ccf",
+      "evidence.tar.gz": "324ea5b8f8d14049284bab3601df626e8798e8de0a2e5d3cd26c15075d6b6cc4"
+    }
+  },
+  "limitations": [
+    "Workflow code is a test-side simulation that drives Core activations directly; no language SDK in this revision handles ResolveStreamRead.",
+    "Only records_in_history=true with the in-memory test Stream Store was exercised.",
+    "Only Temporal dev Server 1.32.0-162.0 (in-memory) on linux/arm64 was exercised.",
+    "The assertions characterize the buggy behavior of the pinned revision; a fix will make this test fail by design."
+  ]
+}
